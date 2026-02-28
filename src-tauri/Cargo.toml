@@ -1,0 +1,17 @@
+[package]
+name = "menu-planner"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2.1", features = [] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.32", features = ["bundled"] }
+validator = { version = "0.16", features = ["derive"] }
+refinery = { version = "0.8", features = ["rusqlite"] }
+thiserror = "1.0"

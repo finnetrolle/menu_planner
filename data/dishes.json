@@ -1,0 +1,212 @@
+{
+  "dishes": [
+    {
+      "id": 4,
+      "name": "Чашушули",
+      "ingredients": [
+        { "ingredient_id": 1, "name": "говядина лопатка лента", "amount": 140.0 },
+        { "ingredient_id": 22, "name": "масло подсолнечное", "amount": 2.0 },
+        { "ingredient_id": 25, "name": "кинза", "amount": 5.0 },
+        { "ingredient_id": 30, "name": "перец болгарский", "amount": 50.0 },
+        { "ingredient_id": 31, "name": "лук", "amount": 50.0 },
+        { "ingredient_id": 37, "name": "помидоры", "amount": 100.0 },
+        { "ingredient_id": 46, "name": "петрушка", "amount": 5.0 },
+        { "ingredient_id": 52, "name": "томатная паста", "amount": 5.0 }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Окрошка",
+      "ingredients": [
+        { "ingredient_id": 15, "name": "йогурт теос 2%", "amount": 30.0 },
+        { "ingredient_id": 24, "name": "яйцо с1", "amount": 60.0 },
+        { "ingredient_id": 29, "name": "картофель", "amount": 50.0 },
+        { "ingredient_id": 32, "name": "редис", "amount": 50.0 },
+        { "ingredient_id": 36, "name": "огурцы", "amount": 50.0 },
+        { "ingredient_id": 50, "name": "горчица", "amount": 5.0 },
+        { "ingredient_id": 54, "name": "квас очаково", "amount": 200.0 },
+        { "ingredient_id": 2, "name": "курица грудка лента", "amount": 100.0 }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Кофе с молоком",
+      "ingredients": [
+        { "ingredient_id": 23, "name": "вода", "amount": 150.0 },
+        { "ingredient_id": 74, "name": "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%", "amount": 150.0 }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Овсяная каша",
+      "ingredients": [
+        { "ingredient_id": 23, "name": "вода", "amount": 150.0 },
+        { "ingredient_id": 60, "name": "овсянка 2", "amount": 50.0 },
+        { "ingredient_id": 74, "name": "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%", "amount": 150.0 }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Минтай",
+      "ingredients": [
+        { "ingredient_id": 57, "name": "минтай замороженный лента", "amount": 400.0 }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Оливье",
+      "ingredients": [
+        { "ingredient_id": 2, "name": "курица грудка лента", "amount": 100.0 },
+        { "ingredient_id": 15, "name": "йогурт теос 2%", "amount": 50.0 },
+        { "ingredient_id": 24, "name": "яйцо с1", "amount": 48.0 },
+        { "ingredient_id": 26, "name": "соленый огурец", "amount": 40.0 },
+        { "ingredient_id": 28, "name": "морковь", "amount": 40.0 },
+        { "ingredient_id": 29, "name": "картофель", "amount": 80.0 },
+        { "ingredient_id": 45, "name": "зеленый горошек", "amount": 80.0 }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Куриное филе",
+      "ingredients": [
+        { "ingredient_id": 2, "name": "курица грудка лента", "amount": 250.0 }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Картофель фри",
+      "ingredients": [
+        { "ingredient_id": 29, "name": "картофель", "amount": 200.0 }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Щи",
+      "ingredients": [
+        { "ingredient_id": 1, "name": "говядина лопатка лента", "amount": 70.0 },
+        { "ingredient_id": 15, "name": "йогурт теос 2%", "amount": 30.0 },
+        { "ingredient_id": 22, "name": "масло подсолнечное", "amount": 2.0 },
+        { "ingredient_id": 23, "name": "вода", "amount": 300.0 },
+        { "ingredient_id": 28, "name": "морковь", "amount": 15.0 },
+        { "ingredient_id": 29, "name": "картофель", "amount": 20.0 },
+        { "ingredient_id": 30, "name": "перец болгарский", "amount": 15.0 },
+        { "ingredient_id": 31, "name": "лук", "amount": 15.0 },
+        { "ingredient_id": 52, "name": "томатная паста", "amount": 7.0 },
+        { "ingredient_id": 53, "name": "чеснок", "amount": 0.25 },
+        { "ingredient_id": 58, "name": "капуста квашеная", "amount": 30.0 }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Винегрет",
+      "ingredients": [
+        { "ingredient_id": 22, "name": "масло подсолнечное", "amount": 5.0 },
+        { "ingredient_id": 26, "name": "соленый огурец", "amount": 40.0 },
+        { "ingredient_id": 27, "name": "свекла", "amount": 80.0 },
+        { "ingredient_id": 28, "name": "морковь", "amount": 80.0 },
+        { "ingredient_id": 29, "name": "картофель", "amount": 80.0 },
+        { "ingredient_id": 31, "name": "лук", "amount": 40.0 },
+        { "ingredient_id": 45, "name": "зеленый горошек", "amount": 80.0 },
+        { "ingredient_id": 58, "name": "капуста квашеная", "amount": 80.0 }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Шин Рамен",
+      "ingredients": [
+        { "ingredient_id": 23, "name": "вода", "amount": 300.0 },
+        { "ingredient_id": 6, "name": "шин рамен", "amount": 60.0 },
+        { "ingredient_id": 51, "name": "майонез рикко провансаль", "amount": 15.0 },
+        { "ingredient_id": 53, "name": "чеснок", "amount": 20.0 },
+        { "ingredient_id": 43, "name": "лук зеленый", "amount": 50.0 }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Греча с молоком",
+      "ingredients": [
+        { "ingredient_id": 4, "name": "гречневая крупа мистраль", "amount": 100.0 },
+        { "ingredient_id": 23, "name": "вода", "amount": 200.0 },
+        { "ingredient_id": 74, "name": "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%", "amount": 200.0 }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Банан",
+      "ingredients": [
+        { "ingredient_id": 64, "name": "банан", "amount": 140.0 }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Паста Барилла 100",
+      "ingredients": [
+        { "ingredient_id": 19, "name": "масло сливочное 82,5", "amount": 3.0 },
+        { "ingredient_id": 8, "name": "спагетти барилла", "amount": 100.0 }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Лапша с курицей",
+      "ingredients": [
+        { "ingredient_id": 22, "name": "масло подсолнечное", "amount": 10.0 },
+        { "ingredient_id": 28, "name": "морковь", "amount": 50.0 },
+        { "ingredient_id": 30, "name": "перец болгарский", "amount": 50.0 },
+        { "ingredient_id": 47, "name": "соевый соус", "amount": 25.0 },
+        { "ingredient_id": 68, "name": "Лапша пшеничная Midori удон", "amount": 100.0 },
+        { "ingredient_id": 69, "name": "Апельсин", "amount": 70.0 },
+        { "ingredient_id": 70, "name": "Имбирь", "amount": 10.0 },
+        { "ingredient_id": 71, "name": "Крахмал картофельный", "amount": 3.0 },
+        { "ingredient_id": 2, "name": "курица грудка лента", "amount": 75.0 },
+        { "ingredient_id": 43, "name": "лук зеленый", "amount": 25.0 }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Мармеладка",
+      "ingredients": [
+        { "ingredient_id": 72, "name": "Мармелад", "amount": 12.5 }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Яблоко",
+      "ingredients": [
+        { "ingredient_id": 65, "name": "яблоко айдаред", "amount": 140.0 }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Вареное яйцо",
+      "ingredients": [
+        { "ingredient_id": 24, "name": "яйцо с1", "amount": 60.0 }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Мимоза тунцовая",
+      "ingredients": [
+        { "ingredient_id": 15, "name": "йогурт теос 2%", "amount": 40.0 },
+        { "ingredient_id": 24, "name": "яйцо с1", "amount": 30.0 },
+        { "ingredient_id": 28, "name": "морковь", "amount": 75.0 },
+        { "ingredient_id": 29, "name": "картофель", "amount": 75.0 },
+        { "ingredient_id": 31, "name": "лук", "amount": 25.0 },
+        { "ingredient_id": 73, "name": "Тунец FORTUNA кусочки в собственном соку", "amount": 90.0 }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Протеин",
+      "ingredients": [
+        { "ingredient_id": 75, "name": "Optimium nutrition Gold Whey", "amount": 31.0 }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Тестовое блюдо",
+      "ingredients": [
+        { "ingredient_id": 78, "name": "Тестовый ингредиент для блюда", "amount": 150.0 }
+      ]
+    }
+  ]
+}

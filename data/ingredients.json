@@ -1,0 +1,564 @@
+{
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "говядина лопатка лента",
+      "protein_g": 19.4,
+      "fat_g": 6.6,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 2,
+      "name": "курица грудка лента",
+      "protein_g": 24.5,
+      "fat_g": 1.1,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 3,
+      "name": "свинина шея лента",
+      "protein_g": 19.0,
+      "fat_g": 28.0,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 4,
+      "name": "гречневая крупа мистраль",
+      "protein_g": 12.0,
+      "fat_g": 3.4,
+      "carbohydrates_g": 72.0
+    },
+    {
+      "id": 5,
+      "name": "рис лазер",
+      "protein_g": 7.5,
+      "fat_g": 1.5,
+      "carbohydrates_g": 77.0
+    },
+    {
+      "id": 6,
+      "name": "шин рамен",
+      "protein_g": 8.0,
+      "fat_g": 13.0,
+      "carbohydrates_g": 67.0
+    },
+    {
+      "id": 7,
+      "name": "лапша рисовая",
+      "protein_g": 6.4,
+      "fat_g": 0.8,
+      "carbohydrates_g": 79.0
+    },
+    {
+      "id": 8,
+      "name": "спагетти барилла",
+      "protein_g": 14.0,
+      "fat_g": 2.0,
+      "carbohydrates_g": 69.7
+    },
+    {
+      "id": 9,
+      "name": "сливки 20%",
+      "protein_g": 2.5,
+      "fat_g": 20.0,
+      "carbohydrates_g": 4.0
+    },
+    {
+      "id": 10,
+      "name": "сливки 10%",
+      "protein_g": 2.8,
+      "fat_g": 10.0,
+      "carbohydrates_g": 4.3
+    },
+    {
+      "id": 11,
+      "name": "молоко 2,5% пискаревское",
+      "protein_g": 3.0,
+      "fat_g": 2.5,
+      "carbohydrates_g": 4.7
+    },
+    {
+      "id": 12,
+      "name": "молоко 0,5% пармалат",
+      "protein_g": 3.0,
+      "fat_g": 0.5,
+      "carbohydrates_g": 4.7
+    },
+    {
+      "id": 13,
+      "name": "сметана 10 простоквашино",
+      "protein_g": 2.8,
+      "fat_g": 10.0,
+      "carbohydrates_g": 3.9
+    },
+    {
+      "id": 14,
+      "name": "сметана 15 пискаревская",
+      "protein_g": 2.6,
+      "fat_g": 15.0,
+      "carbohydrates_g": 3.6
+    },
+    {
+      "id": 15,
+      "name": "йогурт теос 2%",
+      "protein_g": 8.0,
+      "fat_g": 2.0,
+      "carbohydrates_g": 4.2
+    },
+    {
+      "id": 16,
+      "name": "кефир 1% пискаревский",
+      "protein_g": 3.0,
+      "fat_g": 1.0,
+      "carbohydrates_g": 4.0
+    },
+    {
+      "id": 17,
+      "name": "творог 5% пискаревский",
+      "protein_g": 16.0,
+      "fat_g": 5.0,
+      "carbohydrates_g": 3.0
+    },
+    {
+      "id": 18,
+      "name": "творог 0,5% экомилк",
+      "protein_g": 18.0,
+      "fat_g": 0.5,
+      "carbohydrates_g": 1.2
+    },
+    {
+      "id": 19,
+      "name": "масло сливочное 82,5",
+      "protein_g": 0.6,
+      "fat_g": 82.5,
+      "carbohydrates_g": 0.8
+    },
+    {
+      "id": 20,
+      "name": "масло кунжутное",
+      "protein_g": 0.0,
+      "fat_g": 99.8,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 21,
+      "name": "масло оливковое",
+      "protein_g": 0.0,
+      "fat_g": 100.0,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 22,
+      "name": "масло подсолнечное",
+      "protein_g": 0.0,
+      "fat_g": 99.9,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 23,
+      "name": "вода",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 24,
+      "name": "яйцо с1",
+      "protein_g": 12.7,
+      "fat_g": 11.5,
+      "carbohydrates_g": 0.7
+    },
+    {
+      "id": 25,
+      "name": "кинза",
+      "protein_g": 2.1,
+      "fat_g": 0.5,
+      "carbohydrates_g": 0.9
+    },
+    {
+      "id": 26,
+      "name": "соленый огурец",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 2.0
+    },
+    {
+      "id": 27,
+      "name": "свекла",
+      "protein_g": 1.6,
+      "fat_g": 0.2,
+      "carbohydrates_g": 10.0
+    },
+    {
+      "id": 28,
+      "name": "морковь",
+      "protein_g": 1.3,
+      "fat_g": 0.1,
+      "carbohydrates_g": 7.2
+    },
+    {
+      "id": 29,
+      "name": "картофель",
+      "protein_g": 2.0,
+      "fat_g": 0.4,
+      "carbohydrates_g": 16.3
+    },
+    {
+      "id": 30,
+      "name": "перец болгарский",
+      "protein_g": 1.3,
+      "fat_g": 0.1,
+      "carbohydrates_g": 5.3
+    },
+    {
+      "id": 31,
+      "name": "лук",
+      "protein_g": 1.1,
+      "fat_g": 0.1,
+      "carbohydrates_g": 5.7
+    },
+    {
+      "id": 32,
+      "name": "редис",
+      "protein_g": 1.2,
+      "fat_g": 0.1,
+      "carbohydrates_g": 3.4
+    },
+    {
+      "id": 33,
+      "name": "капуста белокочанная",
+      "protein_g": 1.8,
+      "fat_g": 0.1,
+      "carbohydrates_g": 4.7
+    },
+    {
+      "id": 34,
+      "name": "капуста цветная",
+      "protein_g": 2.5,
+      "fat_g": 0.3,
+      "carbohydrates_g": 4.2
+    },
+    {
+      "id": 35,
+      "name": "капуста пакчой",
+      "protein_g": 1.2,
+      "fat_g": 0.2,
+      "carbohydrates_g": 2.0
+    },
+    {
+      "id": 36,
+      "name": "огурцы",
+      "protein_g": 0.8,
+      "fat_g": 0.1,
+      "carbohydrates_g": 2.8
+    },
+    {
+      "id": 37,
+      "name": "помидоры",
+      "protein_g": 1.1,
+      "fat_g": 0.2,
+      "carbohydrates_g": 3.7
+    },
+    {
+      "id": 38,
+      "name": "укроп",
+      "protein_g": 3.5,
+      "fat_g": 1.1,
+      "carbohydrates_g": 4.9
+    },
+    {
+      "id": 39,
+      "name": "айсберг",
+      "protein_g": 0.9,
+      "fat_g": 0.14,
+      "carbohydrates_g": 1.7
+    },
+    {
+      "id": 40,
+      "name": "баклажан",
+      "protein_g": 1.2,
+      "fat_g": 0.1,
+      "carbohydrates_g": 4.5
+    },
+    {
+      "id": 41,
+      "name": "брокколи",
+      "protein_g": 2.57,
+      "fat_g": 0.34,
+      "carbohydrates_g": 3.87
+    },
+    {
+      "id": 42,
+      "name": "кабачок",
+      "protein_g": 0.6,
+      "fat_g": 0.3,
+      "carbohydrates_g": 4.6
+    },
+    {
+      "id": 43,
+      "name": "лук зеленый",
+      "protein_g": 1.3,
+      "fat_g": 0.1,
+      "carbohydrates_g": 3.2
+    },
+    {
+      "id": 44,
+      "name": "сельдерей",
+      "protein_g": 0.69,
+      "fat_g": 0.17,
+      "carbohydrates_g": 1.37
+    },
+    {
+      "id": 45,
+      "name": "зеленый горошек",
+      "protein_g": 3.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 6.0
+    },
+    {
+      "id": 46,
+      "name": "петрушка",
+      "protein_g": 3.7,
+      "fat_g": 0.4,
+      "carbohydrates_g": 7.6
+    },
+    {
+      "id": 47,
+      "name": "соевый соус",
+      "protein_g": 2.5,
+      "fat_g": 0.0,
+      "carbohydrates_g": 13.0
+    },
+    {
+      "id": 48,
+      "name": "рыбный соус",
+      "protein_g": 12.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 6.0
+    },
+    {
+      "id": 49,
+      "name": "устричный соус",
+      "protein_g": 5.1,
+      "fat_g": 0.0,
+      "carbohydrates_g": 28.0
+    },
+    {
+      "id": 50,
+      "name": "горчица",
+      "protein_g": 7.5,
+      "fat_g": 9.5,
+      "carbohydrates_g": 20.0
+    },
+    {
+      "id": 51,
+      "name": "майонез рикко провансаль",
+      "protein_g": 0.5,
+      "fat_g": 67.0,
+      "carbohydrates_g": 2.1
+    },
+    {
+      "id": 52,
+      "name": "томатная паста",
+      "protein_g": 5.5,
+      "fat_g": 0.0,
+      "carbohydrates_g": 14.0
+    },
+    {
+      "id": 53,
+      "name": "чеснок",
+      "protein_g": 6.4,
+      "fat_g": 0.5,
+      "carbohydrates_g": 31.0
+    },
+    {
+      "id": 54,
+      "name": "квас очаково",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 6.5
+    },
+    {
+      "id": 55,
+      "name": "shin ramen",
+      "protein_g": 8.2,
+      "fat_g": 13.0,
+      "carbohydrates_g": 68.0
+    },
+    {
+      "id": 56,
+      "name": "макароны barilla spaghettini n.3",
+      "protein_g": 14.0,
+      "fat_g": 2.0,
+      "carbohydrates_g": 69.7
+    },
+    {
+      "id": 57,
+      "name": "минтай замороженный лента",
+      "protein_g": 16.0,
+      "fat_g": 1.0,
+      "carbohydrates_g": 0.0
+    },
+    {
+      "id": 58,
+      "name": "капуста квашеная",
+      "protein_g": 1.6,
+      "fat_g": 0.07,
+      "carbohydrates_g": 4.62
+    },
+    {
+      "id": 59,
+      "name": "джем махеев",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 68.0
+    },
+    {
+      "id": 60,
+      "name": "овсянка 2",
+      "protein_g": 13.0,
+      "fat_g": 6.5,
+      "carbohydrates_g": 55.0
+    },
+    {
+      "id": 61,
+      "name": "винный уксус",
+      "protein_g": 0.1,
+      "fat_g": 0.0,
+      "carbohydrates_g": 0.4
+    },
+    {
+      "id": 62,
+      "name": "чернослив",
+      "protein_g": 2.5,
+      "fat_g": 0.5,
+      "carbohydrates_g": 58.0
+    },
+    {
+      "id": 63,
+      "name": "кефир 2.5% пискаревский",
+      "protein_g": 3.0,
+      "fat_g": 2.5,
+      "carbohydrates_g": 4.0
+    },
+    {
+      "id": 64,
+      "name": "банан",
+      "protein_g": 1.1,
+      "fat_g": 0.3,
+      "carbohydrates_g": 20.2
+    },
+    {
+      "id": 65,
+      "name": "яблоко айдаред",
+      "protein_g": 0.4,
+      "fat_g": 0.4,
+      "carbohydrates_g": 9.8
+    },
+    {
+      "id": 66,
+      "name": "батон нива водар хлеба",
+      "protein_g": 8.0,
+      "fat_g": 1.0,
+      "carbohydrates_g": 50.0
+    },
+    {
+      "id": 67,
+      "name": "Молоко 3,2% простоквашино",
+      "protein_g": 2.9,
+      "fat_g": 3.2,
+      "carbohydrates_g": 4.7
+    },
+    {
+      "id": 68,
+      "name": "Лапша пшеничная Midori удон",
+      "protein_g": 12.3,
+      "fat_g": 1.4,
+      "carbohydrates_g": 59.2
+    },
+    {
+      "id": 69,
+      "name": "Апельсин",
+      "protein_g": 0.9,
+      "fat_g": 0.2,
+      "carbohydrates_g": 8.4
+    },
+    {
+      "id": 70,
+      "name": "Имбирь",
+      "protein_g": 1.8,
+      "fat_g": 0.8,
+      "carbohydrates_g": 17.8
+    },
+    {
+      "id": 71,
+      "name": "Крахмал картофельный",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 79.0
+    },
+    {
+      "id": 72,
+      "name": "Мармелад",
+      "protein_g": 0.0,
+      "fat_g": 0.0,
+      "carbohydrates_g": 84.0
+    },
+    {
+      "id": 73,
+      "name": "Тунец FORTUNA кусочки в собственном соку",
+      "protein_g": 24.1,
+      "fat_g": 0.75,
+      "carbohydrates_g": 0.29
+    },
+    {
+      "id": 74,
+      "name": "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%",
+      "protein_g": 3.0,
+      "fat_g": 1.5,
+      "carbohydrates_g": 4.7
+    },
+    {
+      "id": 75,
+      "name": "Optimium nutrition Gold Whey",
+      "protein_g": 75.0,
+      "fat_g": 4.5,
+      "carbohydrates_g": 12.0
+    },
+    {
+      "id": 76,
+      "name": "Тестовый ингредиент",
+      "protein_g": 10.0,
+      "fat_g": 5.0,
+      "carbohydrates_g": 20.0
+    },
+    {
+      "id": 77,
+      "name": "Для обновления",
+      "protein_g": 15.0,
+      "fat_g": 8.0,
+      "carbohydrates_g": 25.0
+    },
+    {
+      "id": 78,
+      "name": "Тестовый ингредиент для блюда",
+      "protein_g": 10.0,
+      "fat_g": 5.0,
+      "carbohydrates_g": 20.0
+    },
+    {
+      "id": 79,
+      "name": "Test Ingredient",
+      "protein_g": 10.0,
+      "fat_g": 5.0,
+      "carbohydrates_g": 15.0
+    },
+    {
+      "id": 80,
+      "name": "Ingredient To Update",
+      "protein_g": 10.0,
+      "fat_g": 4.0,
+      "carbohydrates_g": 20.0
+    }
+  ]
+}
