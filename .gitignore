@@ -41,3 +41,8 @@ ui-prompt.md
 ui-screen-map.md
 MEMORY.md
 DESIGN_SYSTEM.md
+
+# Database
+*.db
+*.db-shm
+*.db-wal
