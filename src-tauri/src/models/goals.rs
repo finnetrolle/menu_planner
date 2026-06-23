@@ -5,13 +5,25 @@ use validator::Validate;
 pub struct Goals {
     pub id: Option<i64>,
 
-    #[validate(range(min = 0.0, max = 1000.0, message = "Количество белков должно быть от 0 до 1000"))]
+    #[validate(range(
+        min = 0.0,
+        max = 1000.0,
+        message = "Количество белков должно быть от 0 до 1000"
+    ))]
     pub protein: f64,
 
-    #[validate(range(min = 0.0, max = 1000.0, message = "Количество жиров должно быть от 0 до 1000"))]
+    #[validate(range(
+        min = 0.0,
+        max = 1000.0,
+        message = "Количество жиров должно быть от 0 до 1000"
+    ))]
     pub fat: f64,
 
-    #[validate(range(min = 0.0, max = 1000.0, message = "Количество углеводов должно быть от 0 до 1000"))]
+    #[validate(range(
+        min = 0.0,
+        max = 1000.0,
+        message = "Количество углеводов должно быть от 0 до 1000"
+    ))]
     pub carbohydrates: f64,
 }
 

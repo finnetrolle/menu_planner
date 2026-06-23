@@ -17,6 +17,8 @@ interface IngredientDialogProps {
   onOpenChange: (open: boolean) => void
   ingredient: IngredientWithId | null
   onSave: (ingredient: Omit<IngredientWithId, 'id'>) => void
+  isSaving?: boolean
+  errorMessage?: string | null
 }
 
 export default function IngredientDialog({
@@ -24,6 +26,8 @@ export default function IngredientDialog({
   onOpenChange,
   ingredient,
   onSave,
+  isSaving = false,
+  errorMessage = null,
 }: IngredientDialogProps) {
   const [name, setName] = useState('')
   const [protein, setProtein] = useState<string>('')
@@ -72,12 +76,19 @@ export default function IngredientDialog({
       fat: fatValue,
       carbohydrates: carbohydratesValue,
     })
-
-    onOpenChange(false)
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (isSaving && !nextOpen) {
+          return
+        }
+
+        onOpenChange(nextOpen)
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{ingredient ? 'Редактировать ингредиент' : 'Добавить ингредиент'}</DialogTitle>
@@ -97,6 +108,7 @@ export default function IngredientDialog({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Например: Куриная грудка"
+                disabled={isSaving}
                 required
               />
             </div>
@@ -114,6 +126,7 @@ export default function IngredientDialog({
                   value={protein}
                   onChange={(e) => setProtein(e.target.value)}
                   placeholder="0.0"
+                  disabled={isSaving}
                   required
                 />
               </div>
@@ -129,6 +142,7 @@ export default function IngredientDialog({
                   value={fat}
                   onChange={(e) => setFat(e.target.value)}
                   placeholder="0.0"
+                  disabled={isSaving}
                   required
                 />
               </div>
@@ -144,6 +158,7 @@ export default function IngredientDialog({
                   value={carbohydrates}
                   onChange={(e) => setCarbohydrates(e.target.value)}
                   placeholder="0.0"
+                  disabled={isSaving}
                   required
                 />
               </div>
@@ -164,14 +179,25 @@ export default function IngredientDialog({
                 </div>
               </div>
             </div>
+
+            {errorMessage && (
+              <div className="text-sm text-destructive">
+                {errorMessage}
+              </div>
+            )}
           </div>
 
           <DialogFooter className="mt-6">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              disabled={isSaving}
+            >
               Отмена
             </Button>
-            <Button type="submit">
-              {ingredient ? 'Сохранить' : 'Добавить'}
+            <Button type="submit" disabled={isSaving}>
+              {isSaving ? 'Сохранение...' : ingredient ? 'Сохранить' : 'Добавить'}
             </Button>
           </DialogFooter>
         </form>

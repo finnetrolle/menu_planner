@@ -1,0 +1,1544 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-06-16T07:35:54Z",
+  "source": {
+    "app_identifier": "com.menuplanner.app",
+    "db_path": "/Applications/Menu Planner.app/Contents/MacOS/menu_planner.db"
+  },
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "говядина лопатка лента",
+      "protein": 19.4,
+      "fat": 6.6,
+      "carbohydrates": 0
+    },
+    {
+      "id": 2,
+      "name": "курица грудка лента",
+      "protein": 24.5,
+      "fat": 1.1,
+      "carbohydrates": 0
+    },
+    {
+      "id": 3,
+      "name": "свинина шея лента",
+      "protein": 19,
+      "fat": 28,
+      "carbohydrates": 0
+    },
+    {
+      "id": 4,
+      "name": "гречневая крупа мистраль",
+      "protein": 12,
+      "fat": 3.4,
+      "carbohydrates": 72
+    },
+    {
+      "id": 5,
+      "name": "рис лазер",
+      "protein": 7.5,
+      "fat": 1.5,
+      "carbohydrates": 77
+    },
+    {
+      "id": 6,
+      "name": "шин рамен",
+      "protein": 8,
+      "fat": 13,
+      "carbohydrates": 67
+    },
+    {
+      "id": 7,
+      "name": "лапша рисовая",
+      "protein": 6.4,
+      "fat": 0.8,
+      "carbohydrates": 79
+    },
+    {
+      "id": 8,
+      "name": "спагетти барилла",
+      "protein": 14,
+      "fat": 2,
+      "carbohydrates": 69.7
+    },
+    {
+      "id": 9,
+      "name": "сливки 20%",
+      "protein": 2.5,
+      "fat": 20,
+      "carbohydrates": 4
+    },
+    {
+      "id": 10,
+      "name": "сливки 10%",
+      "protein": 2.8,
+      "fat": 10,
+      "carbohydrates": 4.3
+    },
+    {
+      "id": 11,
+      "name": "молоко 2,5% пискаревское",
+      "protein": 3,
+      "fat": 2.5,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 12,
+      "name": "молоко 0,5% пармалат",
+      "protein": 3,
+      "fat": 0.5,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 13,
+      "name": "сметана 10 простоквашино",
+      "protein": 2.8,
+      "fat": 10,
+      "carbohydrates": 3.9
+    },
+    {
+      "id": 14,
+      "name": "сметана 15 пискаревская",
+      "protein": 2.6,
+      "fat": 15,
+      "carbohydrates": 3.6
+    },
+    {
+      "id": 15,
+      "name": "йогурт теос 2%",
+      "protein": 8,
+      "fat": 2,
+      "carbohydrates": 4.2
+    },
+    {
+      "id": 16,
+      "name": "кефир 1% пискаревский",
+      "protein": 3,
+      "fat": 1,
+      "carbohydrates": 4
+    },
+    {
+      "id": 17,
+      "name": "творог 5% пискаревский",
+      "protein": 16,
+      "fat": 5,
+      "carbohydrates": 3
+    },
+    {
+      "id": 18,
+      "name": "творог 0,5% экомилк",
+      "protein": 18,
+      "fat": 0.5,
+      "carbohydrates": 1.2
+    },
+    {
+      "id": 19,
+      "name": "масло сливочное 82,5",
+      "protein": 0.6,
+      "fat": 82.5,
+      "carbohydrates": 0.8
+    },
+    {
+      "id": 20,
+      "name": "масло кунжутное",
+      "protein": 0,
+      "fat": 99.8,
+      "carbohydrates": 0
+    },
+    {
+      "id": 21,
+      "name": "масло оливковое",
+      "protein": 0,
+      "fat": 100,
+      "carbohydrates": 0
+    },
+    {
+      "id": 22,
+      "name": "масло подсолнечное",
+      "protein": 0,
+      "fat": 99.9,
+      "carbohydrates": 0
+    },
+    {
+      "id": 23,
+      "name": "вода",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 0
+    },
+    {
+      "id": 24,
+      "name": "яйцо с1",
+      "protein": 12.7,
+      "fat": 11.5,
+      "carbohydrates": 0.7
+    },
+    {
+      "id": 25,
+      "name": "кинза",
+      "protein": 2.1,
+      "fat": 0.5,
+      "carbohydrates": 0.9
+    },
+    {
+      "id": 26,
+      "name": "соленый огурец",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 2
+    },
+    {
+      "id": 27,
+      "name": "свекла",
+      "protein": 1.6,
+      "fat": 0.2,
+      "carbohydrates": 10
+    },
+    {
+      "id": 28,
+      "name": "морковь",
+      "protein": 1.3,
+      "fat": 0.1,
+      "carbohydrates": 7.2
+    },
+    {
+      "id": 29,
+      "name": "картофель",
+      "protein": 2,
+      "fat": 0.4,
+      "carbohydrates": 16.3
+    },
+    {
+      "id": 30,
+      "name": "перец болгарский",
+      "protein": 1.3,
+      "fat": 0.1,
+      "carbohydrates": 5.3
+    },
+    {
+      "id": 31,
+      "name": "лук",
+      "protein": 1.1,
+      "fat": 0.1,
+      "carbohydrates": 5.7
+    },
+    {
+      "id": 32,
+      "name": "редис",
+      "protein": 1.2,
+      "fat": 0.1,
+      "carbohydrates": 3.4
+    },
+    {
+      "id": 33,
+      "name": "капуста белокочанная",
+      "protein": 1.8,
+      "fat": 0.1,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 34,
+      "name": "капуста цветная",
+      "protein": 2.5,
+      "fat": 0.3,
+      "carbohydrates": 4.2
+    },
+    {
+      "id": 35,
+      "name": "капуста пакчой",
+      "protein": 1.2,
+      "fat": 0.2,
+      "carbohydrates": 2
+    },
+    {
+      "id": 36,
+      "name": "огурцы",
+      "protein": 0.8,
+      "fat": 0.1,
+      "carbohydrates": 2.8
+    },
+    {
+      "id": 37,
+      "name": "помидоры",
+      "protein": 1.1,
+      "fat": 0.2,
+      "carbohydrates": 3.7
+    },
+    {
+      "id": 38,
+      "name": "укроп",
+      "protein": 3.5,
+      "fat": 1.1,
+      "carbohydrates": 4.9
+    },
+    {
+      "id": 39,
+      "name": "айсберг",
+      "protein": 0.9,
+      "fat": 0.14,
+      "carbohydrates": 1.7
+    },
+    {
+      "id": 40,
+      "name": "баклажан",
+      "protein": 1.2,
+      "fat": 0.1,
+      "carbohydrates": 4.5
+    },
+    {
+      "id": 41,
+      "name": "брокколи",
+      "protein": 2.57,
+      "fat": 0.34,
+      "carbohydrates": 3.87
+    },
+    {
+      "id": 42,
+      "name": "кабачок",
+      "protein": 0.6,
+      "fat": 0.3,
+      "carbohydrates": 4.6
+    },
+    {
+      "id": 43,
+      "name": "лук зеленый",
+      "protein": 1.3,
+      "fat": 0.1,
+      "carbohydrates": 3.2
+    },
+    {
+      "id": 44,
+      "name": "сельдерей",
+      "protein": 0.69,
+      "fat": 0.17,
+      "carbohydrates": 1.37
+    },
+    {
+      "id": 45,
+      "name": "зеленый горошек",
+      "protein": 3,
+      "fat": 0,
+      "carbohydrates": 6
+    },
+    {
+      "id": 46,
+      "name": "петрушка",
+      "protein": 3.7,
+      "fat": 0.4,
+      "carbohydrates": 7.6
+    },
+    {
+      "id": 47,
+      "name": "соевый соус",
+      "protein": 2.5,
+      "fat": 0,
+      "carbohydrates": 13
+    },
+    {
+      "id": 48,
+      "name": "рыбный соус",
+      "protein": 12,
+      "fat": 0,
+      "carbohydrates": 6
+    },
+    {
+      "id": 49,
+      "name": "устричный соус",
+      "protein": 5.1,
+      "fat": 0,
+      "carbohydrates": 28
+    },
+    {
+      "id": 50,
+      "name": "горчица",
+      "protein": 7.5,
+      "fat": 9.5,
+      "carbohydrates": 20
+    },
+    {
+      "id": 51,
+      "name": "майонез рикко провансаль",
+      "protein": 0.5,
+      "fat": 67,
+      "carbohydrates": 2.1
+    },
+    {
+      "id": 52,
+      "name": "томатная паста",
+      "protein": 5.5,
+      "fat": 0,
+      "carbohydrates": 14
+    },
+    {
+      "id": 53,
+      "name": "чеснок",
+      "protein": 6.4,
+      "fat": 0.5,
+      "carbohydrates": 31
+    },
+    {
+      "id": 54,
+      "name": "квас очаково",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 6.5
+    },
+    {
+      "id": 55,
+      "name": "shin ramen",
+      "protein": 8.2,
+      "fat": 13,
+      "carbohydrates": 68
+    },
+    {
+      "id": 56,
+      "name": "макароны barilla spaghettini n.3",
+      "protein": 14,
+      "fat": 2,
+      "carbohydrates": 69.7
+    },
+    {
+      "id": 57,
+      "name": "минтай замороженный лента",
+      "protein": 16,
+      "fat": 1,
+      "carbohydrates": 0
+    },
+    {
+      "id": 58,
+      "name": "капуста квашеная",
+      "protein": 1.6,
+      "fat": 0.07,
+      "carbohydrates": 4.62
+    },
+    {
+      "id": 59,
+      "name": "джем махеев",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 68
+    },
+    {
+      "id": 60,
+      "name": "овсянка 2",
+      "protein": 13,
+      "fat": 6.5,
+      "carbohydrates": 55
+    },
+    {
+      "id": 61,
+      "name": "винный уксус",
+      "protein": 0.1,
+      "fat": 0,
+      "carbohydrates": 0.4
+    },
+    {
+      "id": 62,
+      "name": "чернослив",
+      "protein": 2.5,
+      "fat": 0.5,
+      "carbohydrates": 58
+    },
+    {
+      "id": 63,
+      "name": "кефир 2.5% пискаревский",
+      "protein": 3,
+      "fat": 2.5,
+      "carbohydrates": 4
+    },
+    {
+      "id": 64,
+      "name": "банан",
+      "protein": 1.1,
+      "fat": 0.3,
+      "carbohydrates": 20.2
+    },
+    {
+      "id": 65,
+      "name": "яблоко айдаред",
+      "protein": 0.4,
+      "fat": 0.4,
+      "carbohydrates": 9.8
+    },
+    {
+      "id": 66,
+      "name": "батон нива водар хлеба",
+      "protein": 8,
+      "fat": 1,
+      "carbohydrates": 50
+    },
+    {
+      "id": 67,
+      "name": "Молоко 3,2% простоквашино",
+      "protein": 2.9,
+      "fat": 3.2,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 68,
+      "name": "Лапша пшеничная Midori удон",
+      "protein": 12.3,
+      "fat": 1.4,
+      "carbohydrates": 59.2
+    },
+    {
+      "id": 69,
+      "name": "Апельсин",
+      "protein": 0.9,
+      "fat": 0.2,
+      "carbohydrates": 8.4
+    },
+    {
+      "id": 70,
+      "name": "Имбирь",
+      "protein": 1.8,
+      "fat": 0.8,
+      "carbohydrates": 17.8
+    },
+    {
+      "id": 71,
+      "name": "Крахмал картофельный",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 79
+    },
+    {
+      "id": 72,
+      "name": "Мармелад",
+      "protein": 0,
+      "fat": 0,
+      "carbohydrates": 84
+    },
+    {
+      "id": 73,
+      "name": "Тунец FORTUNA кусочки в собственном соку",
+      "protein": 24.1,
+      "fat": 0.75,
+      "carbohydrates": 0.29
+    },
+    {
+      "id": 74,
+      "name": "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%",
+      "protein": 3,
+      "fat": 1.5,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 75,
+      "name": "Optimium nutrition Gold Whey",
+      "protein": 75,
+      "fat": 4.5,
+      "carbohydrates": 12
+    },
+    {
+      "id": 76,
+      "name": "Тестовый ингредиент",
+      "protein": 10,
+      "fat": 5,
+      "carbohydrates": 20
+    },
+    {
+      "id": 77,
+      "name": "Для обновления",
+      "protein": 15,
+      "fat": 8,
+      "carbohydrates": 25
+    },
+    {
+      "id": 78,
+      "name": "Тестовый ингредиент для блюда",
+      "protein": 10,
+      "fat": 5,
+      "carbohydrates": 20
+    },
+    {
+      "id": 79,
+      "name": "Test Ingredient",
+      "protein": 10,
+      "fat": 5,
+      "carbohydrates": 15
+    },
+    {
+      "id": 80,
+      "name": "Ingredient To Update",
+      "protein": 10,
+      "fat": 4,
+      "carbohydrates": 20
+    },
+    {
+      "id": 81,
+      "name": "Чечевица",
+      "protein": 26,
+      "fat": 2,
+      "carbohydrates": 57
+    },
+    {
+      "id": 82,
+      "name": "Перец чили",
+      "protein": 1.9,
+      "fat": 0.4,
+      "carbohydrates": 8.8
+    },
+    {
+      "id": 83,
+      "name": "Кимчи Юмей",
+      "protein": 2.8,
+      "fat": 0.8,
+      "carbohydrates": 9.9
+    },
+    {
+      "id": 84,
+      "name": "Хлеб зерновой",
+      "protein": 10.2,
+      "fat": 13.5,
+      "carbohydrates": 31
+    },
+    {
+      "id": 85,
+      "name": "Минтай фарш",
+      "protein": 20,
+      "fat": 1,
+      "carbohydrates": 0
+    },
+    {
+      "id": 86,
+      "name": "Отруби ржаные",
+      "protein": 13,
+      "fat": 2,
+      "carbohydrates": 40
+    },
+    {
+      "id": 87,
+      "name": "Молоко Viola обезжиренное",
+      "protein": 3.1,
+      "fat": 0.05,
+      "carbohydrates": 4.7
+    },
+    {
+      "id": 88,
+      "name": "Кефир био баланс 0.1%",
+      "protein": 3.3,
+      "fat": 0.1,
+      "carbohydrates": 4.5
+    },
+    {
+      "id": 89,
+      "name": "Клубника замороженная",
+      "protein": 0.8,
+      "fat": 0.4,
+      "carbohydrates": 7.5
+    },
+    {
+      "id": 90,
+      "name": "Куриный бульон",
+      "protein": 2.5,
+      "fat": 1.2,
+      "carbohydrates": 0.3
+    },
+    {
+      "id": 91,
+      "name": "Перловка Увелка в пакетах 80",
+      "protein": 10,
+      "fat": 1,
+      "carbohydrates": 69
+    },
+    {
+      "id": 92,
+      "name": "рис басмати",
+      "protein": 9.5,
+      "fat": 0.2,
+      "carbohydrates": 75
+    },
+    {
+      "id": 93,
+      "name": "Изюм",
+      "protein": 3,
+      "fat": 0.5,
+      "carbohydrates": 66
+    }
+  ],
+  "dishes": [
+    {
+      "id": 4,
+      "name": "Чашушули",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 140
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 25,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 37,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 46,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Окрошка",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 60
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 32,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 36,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 50,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 54,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Кофе с молоком",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 23,
+          "amount": 150
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Овсяная каша",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 23,
+          "amount": 150
+        },
+        {
+          "ingredient_id": 60,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Минтай",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 57,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Оливье",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 48
+        },
+        {
+          "ingredient_id": 26,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 45,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Куриное филе",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Картофель фри",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 29,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Щи",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 300
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 7
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 1
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Винегрет",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 22,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 26,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 45,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Шин Рамен",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 6,
+          "amount": 60
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 300
+        },
+        {
+          "ingredient_id": 43,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 51,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 15
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Греча с молоком",
+      "weight": 300,
+      "ingredients": [
+        {
+          "ingredient_id": 4,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Банан",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 64,
+          "amount": 140
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Паста Барилла 100",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 8,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Лапша с курицей",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 43,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 47,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 68,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 69,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 70,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 71,
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Мармеладка",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 72,
+          "amount": 12.5
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Яблоко",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 65,
+          "amount": 140
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Вареное яйцо",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 24,
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Мимоза тунцовая",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 15,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 73,
+          "amount": 90
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Протеин",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 75,
+          "amount": 31
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Тестовое блюдо",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 78,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Борщ",
+      "weight": 400,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 250
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 64
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 7
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 61,
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Суп из чечевицы",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 140
+        },
+        {
+          "ingredient_id": 21,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 500
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 4
+        },
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 82,
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Вареный брокколи",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 21,
+          "amount": 3
+        },
+        {
+          "ingredient_id": 41,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Порция Кимчи",
+      "weight": 250,
+      "ingredients": [
+        {
+          "ingredient_id": 83,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Хлеб зерновой кусочек",
+      "weight": 50,
+      "ingredients": [
+        {
+          "ingredient_id": 84,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Минтай фарш",
+      "weight": 150,
+      "ingredients": [
+        {
+          "ingredient_id": 85,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Отруби",
+      "weight": 50,
+      "ingredients": [
+        {
+          "ingredient_id": 86,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Клубника",
+      "weight": 250,
+      "ingredients": [
+        {
+          "ingredient_id": 89,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Суп из чечевицы на курице",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 28,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 82,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Щи на курице",
+      "weight": 300,
+      "ingredients": [
+        {
+          "ingredient_id": 13,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Вареная чечевица",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Котлета быкурица",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 2,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 11,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 84,
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Борщ на курице",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 61,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Картофельное пюре",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 29,
+          "amount": 200
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Вареная в пакете перловка",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 91,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Стакан молока",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 74,
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Плов",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 92,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Гречка",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 4,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 200
+        }
+      ]
+    }
+  ]
+}

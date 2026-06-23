@@ -3,7 +3,10 @@ use validator::Validate;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Validate)]
 pub struct DishIngredient {
-    #[validate(range(min = 0.0, message = "Количество ингредиента должно быть положительным числом"))]
+    #[validate(range(
+        min = 0.0,
+        message = "Количество ингредиента должно быть положительным числом"
+    ))]
     pub amount: f64,
 
     pub ingredient_id: i64,

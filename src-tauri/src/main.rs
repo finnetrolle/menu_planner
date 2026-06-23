@@ -1,14 +1,23 @@
-mod models;
-mod database;
 mod commands;
+mod database;
+mod error;
+mod models;
 mod repositories;
 mod services;
-mod error;
 mod tests;
 
 fn main() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_shell::init())
+        .setup(|app| {
+            let db_path =
+                database::resolve_app_db_path(app.handle()).map_err(std::io::Error::other)?;
+
+            database::configure_database_path(db_path).map_err(std::io::Error::other)?;
+
+            database::get_connection().map_err(std::io::Error::other)?;
+
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             commands::get_ingredients,
             commands::get_ingredient,
@@ -22,7 +31,7 @@ fn main() {
             commands::delete_dish,
             commands::get_goals,
             commands::save_goals,
-            commands::calculate_menu_nutrition,
+            commands::calculate_menu_plan,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

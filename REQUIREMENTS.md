@@ -442,7 +442,6 @@ tauri-build = { version = "2.0", features = [] }
 
 ## 12. Источники
 
-- Анализ существующего приложения: `/Users/finnetrolle/dev/menu_app`
 - Документация Tauri 2.0: https://v2.tauri.app/
 - Radix UI: https://www.radix-ui.com/
 - TanStack Query: https://tanstack.com/query/latest

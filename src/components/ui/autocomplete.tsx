@@ -14,6 +14,7 @@ interface AutocompleteProps {
   onChange: (value: number) => void
   placeholder?: string
   emptyMessage?: string
+  disabled?: boolean
 }
 
 export function Autocomplete({
@@ -22,6 +23,7 @@ export function Autocomplete({
   onChange,
   placeholder = "Выберите ингредиент",
   emptyMessage = "Ингредиенты не найдены",
+  disabled = false,
 }: AutocompleteProps) {
   const [open, setOpen] = React.useState(false)
   const [search, setSearch] = React.useState('')
@@ -91,7 +93,7 @@ export function Autocomplete({
   }, [selectedIndex])
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={(nextOpen) => !disabled && setOpen(nextOpen)}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -99,6 +101,7 @@ export function Autocomplete({
           aria-expanded={open}
           className="w-full justify-between h-10"
           type="button"
+          disabled={disabled}
         >
           {selectedOption ? selectedOption.label : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

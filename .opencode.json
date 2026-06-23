@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ohmycode": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ohMyCode",
+      "options": {
+        "baseURL": "https://api.ohmycode.ai/v1"
+      },
+      "models": {
+        "claude-opus-4-6": {
+          "name": "Claude Opus 4.6",
+          "limit": { "context": 200000, "output": 32000 }
+        },
+        "gpt-5.3": {
+          "name": "GPT-5.3",
+          "limit": { "context": 128000, "output": 16384 }
+        }
+      }
+    }
+  }
+}

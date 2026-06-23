@@ -38,6 +38,8 @@ interface DishDialogProps {
   dish: DishWithId | null
   ingredients: IngredientWithId[]
   onSave: (dish: Omit<DishWithId, 'id'>) => void
+  isSaving?: boolean
+  errorMessage?: string | null
 }
 
 interface DishIngredientRow {
@@ -61,6 +63,7 @@ function SortableIngredientRow({
   onUpdate,
   onRemove,
   onDuplicate,
+  isSaving,
 }: {
   row: DishIngredientRow
   ingredients: IngredientWithId[]
@@ -68,6 +71,7 @@ function SortableIngredientRow({
   onUpdate: (id: string, field: keyof DishIngredientRow, value: number | string) => void
   onRemove: (id: string) => void
   onDuplicate: (row: DishIngredientRow) => void
+  isSaving: boolean
 }) {
   const {
     attributes,
@@ -121,6 +125,7 @@ function SortableIngredientRow({
           onChange={(val) => onUpdate(row.id, 'ingredient_id', val)}
           placeholder="Выберите ингредиент"
           emptyMessage="Ингредиенты не найдены"
+          disabled={isSaving}
         />
         {ingredient && rowNutrition && row.amount > 0 && (
           <div className="text-xs text-muted-foreground mt-1">
@@ -141,6 +146,7 @@ function SortableIngredientRow({
             onUpdate(row.id, 'amount', parseFloat(e.target.value) || 0)
           }
           className="w-24"
+          disabled={isSaving}
         />
         <span className="text-sm text-muted-foreground">г</span>
       </div>
@@ -154,6 +160,7 @@ function SortableIngredientRow({
           onClick={() => onDuplicate(row)}
           className="h-9 w-9 p-0"
           title="Дублировать"
+          disabled={isSaving}
         >
           <Copy className="h-4 w-4" />
         </Button>
@@ -164,6 +171,7 @@ function SortableIngredientRow({
           onClick={() => onRemove(row.id)}
           className="h-9 w-9 p-0"
           title="Удалить"
+          disabled={isSaving}
         >
           <Trash2 className="h-4 w-4 text-destructive" />
         </Button>
@@ -178,10 +186,13 @@ export default function DishDialog({
   dish,
   ingredients,
   onSave,
+  isSaving = false,
+  errorMessage = null,
 }: DishDialogProps) {
   const [name, setName] = useState('')
   const [weight, setWeight] = useState<string>('')
   const [ingredientRows, setIngredientRows] = useState<DishIngredientRow[]>([])
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   // Настройка dnd-kit сенсоров
   const sensors = useSensors(
@@ -198,6 +209,7 @@ export default function DishDialog({
   // Сброс формы при открытии
   useEffect(() => {
     if (open) {
+      setSubmitError(null)
       if (dish) {
         // Режим редактирования
         setName(dish.name)
@@ -219,11 +231,13 @@ export default function DishDialog({
 
   // Удалить строку ингредиента
   const removeIngredientRow = (id: string) => {
+    setSubmitError(null)
     setIngredientRows(ingredientRows.filter((row) => row.id !== id))
   }
 
   // Обновить ингредиент
   const updateIngredientRow = (id: string, field: keyof DishIngredientRow, value: number | string) => {
+    setSubmitError(null)
     setIngredientRows(
       ingredientRows.map((row) =>
         row.id === id ? { ...row, [field]: value } : row
@@ -233,6 +247,7 @@ export default function DishDialog({
 
   // Дублировать ингредиент
   const duplicateIngredientRow = (row: DishIngredientRow) => {
+    setSubmitError(null)
     setIngredientRows([
       ...ingredientRows,
       { ...row, id: `dup-${Date.now()}` },
@@ -241,6 +256,7 @@ export default function DishDialog({
 
   // Добавить новый ингредиент
   const addNewIngredient = () => {
+    setSubmitError(null)
     setIngredientRows([
       ...ingredientRows,
       { ingredient_id: 0, amount: 0, id: `new-${Date.now()}` },
@@ -326,8 +342,28 @@ export default function DishDialog({
     [ingredients]
   )
 
+  const duplicateIngredientName = useMemo(() => {
+    const seen = new Set<number>()
+
+    for (const row of ingredientRows) {
+      if (row.ingredient_id <= 0 || row.amount <= 0) {
+        continue
+      }
+
+      if (seen.has(row.ingredient_id)) {
+        return ingredients.find((ingredient) => ingredient.id === row.ingredient_id)?.name
+          ?? `#${row.ingredient_id}`
+      }
+
+      seen.add(row.ingredient_id)
+    }
+
+    return null
+  }, [ingredientRows, ingredients])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitError(null)
 
     if (!name.trim()) {
       return
@@ -344,17 +380,31 @@ export default function DishDialog({
       return
     }
 
+    if (duplicateIngredientName) {
+      setSubmitError(
+        `Ингредиент «${duplicateIngredientName}» уже добавлен. Объедините строки или выберите другой ингредиент.`
+      )
+      return
+    }
+
     onSave({
       name,
       weight: weight ? parseFloat(weight) : null,
       ingredients: dishIngredients,
     })
-
-    onOpenChange(false)
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (isSaving && !nextOpen) {
+          return
+        }
+
+        onOpenChange(nextOpen)
+      }}
+    >
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{dish ? 'Редактировать блюдо' : 'Добавить блюдо'}</DialogTitle>
@@ -375,6 +425,7 @@ export default function DishDialog({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Например: Оливье"
+                  disabled={isSaving}
                   required
                 />
               </div>
@@ -389,6 +440,7 @@ export default function DishDialog({
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   placeholder="200"
+                  disabled={isSaving}
                 />
               </div>
             </div>
@@ -405,6 +457,7 @@ export default function DishDialog({
                   size="sm"
                   onClick={addNewIngredient}
                   className="gap-1"
+                  disabled={isSaving}
                 >
                   <Plus className="h-4 w-4" />
                   Добавить ингредиент
@@ -435,11 +488,30 @@ export default function DishDialog({
                           onUpdate={updateIngredientRow}
                           onRemove={removeIngredientRow}
                           onDuplicate={duplicateIngredientRow}
+                          isSaving={isSaving}
                         />
                       ))}
                     </div>
                   </SortableContext>
                 </DndContext>
+              )}
+
+              {duplicateIngredientName && (
+                <div className="text-sm text-destructive">
+                  Ингредиент «{duplicateIngredientName}» нельзя добавить в блюдо дважды.
+                </div>
+              )}
+
+              {submitError && (
+                <div className="text-sm text-destructive">
+                  {submitError}
+                </div>
+              )}
+
+              {errorMessage && (
+                <div className="text-sm text-destructive">
+                  {errorMessage}
+                </div>
               )}
             </div>
 
@@ -521,11 +593,16 @@ export default function DishDialog({
           </div>
 
           <DialogFooter className="mt-6">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              disabled={isSaving}
+            >
               Отмена
             </Button>
-            <Button type="submit">
-              {dish ? 'Сохранить' : 'Добавить'}
+            <Button type="submit" disabled={Boolean(duplicateIngredientName) || isSaving}>
+              {isSaving ? 'Сохранение...' : dish ? 'Сохранить' : 'Добавить'}
             </Button>
           </DialogFooter>
         </form>

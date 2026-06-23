@@ -1,0 +1,885 @@
+{
+  "dishes": [
+    {
+      "id": 4,
+      "name": "Чашушули",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 140
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 25,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 37,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 46,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Окрошка",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 60
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 32,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 36,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 50,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 54,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Кофе с молоком",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 23,
+          "amount": 150
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Овсяная каша",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 23,
+          "amount": 150
+        },
+        {
+          "ingredient_id": 60,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Минтай",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 57,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Оливье",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 48
+        },
+        {
+          "ingredient_id": 26,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 45,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Куриное филе",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Картофель фри",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 29,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Щи",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 300
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 7
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 1
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Винегрет",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 22,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 26,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 45,
+          "amount": 80
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Шин Рамен",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 6,
+          "amount": 60
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 300
+        },
+        {
+          "ingredient_id": 43,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 51,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 15
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Греча с молоком",
+      "weight": 300,
+      "ingredients": [
+        {
+          "ingredient_id": 4,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Банан",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 64,
+          "amount": 140
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Паста Барилла 100",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 8,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Лапша с курицей",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 2,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 30,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 43,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 47,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 68,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 69,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 70,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 71,
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Мармеладка",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 72,
+          "amount": 12.5
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Яблоко",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 65,
+          "amount": 140
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Вареное яйцо",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 24,
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Мимоза тунцовая",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 15,
+          "amount": 40
+        },
+        {
+          "ingredient_id": 24,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 75
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 73,
+          "amount": 90
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Протеин",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 75,
+          "amount": 31
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Тестовое блюдо",
+      "weight": 0,
+      "ingredients": [
+        {
+          "ingredient_id": 78,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Борщ",
+      "weight": 400,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 70
+        },
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 250
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 64
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 7
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 61,
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Суп из чечевицы",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 140
+        },
+        {
+          "ingredient_id": 21,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 500
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 4
+        },
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 82,
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Вареный брокколи",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 21,
+          "amount": 3
+        },
+        {
+          "ingredient_id": 41,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Порция Кимчи",
+      "weight": 250,
+      "ingredients": [
+        {
+          "ingredient_id": 83,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Хлеб зерновой кусочек",
+      "weight": 50,
+      "ingredients": [
+        {
+          "ingredient_id": 84,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Минтай фарш",
+      "weight": 150,
+      "ingredients": [
+        {
+          "ingredient_id": 85,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Отруби",
+      "weight": 50,
+      "ingredients": [
+        {
+          "ingredient_id": 86,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Клубника",
+      "weight": 250,
+      "ingredients": [
+        {
+          "ingredient_id": 89,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Суп из чечевицы на курице",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 28,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 82,
+          "amount": 10
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Щи на курице",
+      "weight": 300,
+      "ingredients": [
+        {
+          "ingredient_id": 13,
+          "amount": 25
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Вареная чечевица",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 81,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Котлета быкурица",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 2,
+          "amount": 50
+        },
+        {
+          "ingredient_id": 11,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 84,
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Борщ на курице",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 13,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 27,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 29,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 20
+        },
+        {
+          "ingredient_id": 52,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 53,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 58,
+          "amount": 30
+        },
+        {
+          "ingredient_id": 61,
+          "amount": 2
+        },
+        {
+          "ingredient_id": 90,
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Картофельное пюре",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 29,
+          "amount": 200
+        },
+        {
+          "ingredient_id": 74,
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Вареная в пакете перловка",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 91,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Стакан молока",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 74,
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Плов",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 1,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 22,
+          "amount": 5
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 28,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 31,
+          "amount": 15
+        },
+        {
+          "ingredient_id": 92,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Гречка",
+      "weight": null,
+      "ingredients": [
+        {
+          "ingredient_id": 4,
+          "amount": 100
+        },
+        {
+          "ingredient_id": 23,
+          "amount": 200
+        }
+      ]
+    }
+  ]
+}

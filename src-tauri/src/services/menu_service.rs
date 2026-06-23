@@ -1,21 +1,65 @@
+use crate::error::AppResult;
 use crate::models::{Dish, Goals};
-use crate::services::nutrition_service::{NutritionInfo, NutritionService, DishNutrition, SelectedDish};
+use crate::services::nutrition_service::{DishNutrition, NutritionInfo, NutritionService};
 use rusqlite::Connection;
+use serde::{Deserialize, Serialize};
+use std::collections::{BTreeMap, HashMap};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SelectedDish {
+    pub dish_id: i64,
+    pub portions: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MenuPlanRequest {
+    pub selected_dishes: Vec<SelectedDish>,
+    pub goals: Option<Goals>,
+}
 
 /// Структура для списка покупок
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ShoppingListItem {
     pub ingredient_id: i64,
     pub ingredient_name: String,
     pub amount: f64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GoalComparisonValue {
+    pub current: f64,
+    pub target: f64,
+    pub difference: f64,
+    pub percentage: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MenuGoalComparison {
+    pub calories: GoalComparisonValue,
+    pub protein: GoalComparisonValue,
+    pub fat: GoalComparisonValue,
+    pub carbohydrates: GoalComparisonValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MenuPlanItem {
+    pub dish_id: i64,
+    pub name: String,
+    pub portions: f64,
+    pub weight: f64,
+    pub calories: f64,
+    pub protein: f64,
+    pub fat: f64,
+    pub carbohydrates: f64,
+}
+
 /// Структура для результата планирования меню
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MenuPlanResult {
     pub total_nutrition: NutritionInfo,
     pub goals: Option<Goals>,
-    pub items: Vec<DishNutrition>,
+    pub goal_comparison: Option<MenuGoalComparison>,
+    pub items: Vec<MenuPlanItem>,
     pub shopping_list: Vec<ShoppingListItem>,
 }
 
@@ -23,125 +67,118 @@ pub struct MenuPlanResult {
 pub struct MenuService;
 
 impl MenuService {
-    /// Рассчитать нутрицию для списка выбранных блюд
-    pub fn calculate_menu_nutrition(
+    /// Создать полный план питания с totals, items, shopping list и сравнением с целями.
+    pub fn build_menu_plan(
         conn: &Connection,
-        selected_dishes: &[SelectedDish],
+        request: &MenuPlanRequest,
         dishes: &[Dish],
-    ) -> NutritionInfo {
-        let mut total = NutritionInfo::from_macros(0.0, 0.0, 0.0);
-
-        for selection in selected_dishes {
-            if let Some(dish) = dishes.iter().find(|d| d.id == Some(selection.dish_id)) {
-                let portions = selection.portions.max(1.0);
-                let dish_nutrition = NutritionService::calculate_dish_nutrition(
-                    conn,
-                    dish,
-                    &std::collections::HashMap::new(),
-                );
-
-                if let Some(dn) = dish_nutrition {
-                    let dn_info = NutritionInfo::from_macros(
-                        dn.protein,
-                        dn.fat,
-                        dn.carbohydrates,
-                    );
-                    total = total.add(&dn_info.multiply(portions));
-                }
-            }
-        }
-
-        total
-    }
-
-    /// Создать полный план питания с нутрицией и списком покупок
-    pub fn create_menu_plan(
-        conn: &Connection,
-        selected_dishes: &[SelectedDish],
-        dishes: &[Dish],
-        goals: Option<&Goals>,
-    ) -> MenuPlanResult {
-        let total_nutrition =
-            Self::calculate_menu_nutrition(conn, selected_dishes, dishes);
-
-        let items: Vec<DishNutrition> = selected_dishes
+    ) -> AppResult<MenuPlanResult> {
+        let ingredients_map = NutritionService::load_ingredients_map(conn)?;
+        let dishes_by_id: HashMap<i64, &Dish> = dishes
             .iter()
-            .filter_map(|selection| {
-                if let Some(dish) = dishes.iter().find(|d| d.id == Some(selection.dish_id)) {
-                    let portions = selection.portions.max(1.0);
-                    let dish_nutrition = NutritionService::calculate_dish_nutrition(
-                        conn,
-                        dish,
-                        &std::collections::HashMap::new(),
-                    );
-                    dish_nutrition.map(|mut dn| {
-                        dn.calories *= portions;
-                        dn.protein *= portions;
-                        dn.fat *= portions;
-                        dn.carbohydrates *= portions;
-                        dn.weight *= portions;
-                        dn
-                    })
-                } else {
-                    None
-                }
-            })
+            .filter_map(|dish| dish.id.map(|dish_id| (dish_id, dish)))
             .collect();
 
-        let shopping_list = Self::calculate_shopping_list(conn, selected_dishes, dishes);
+        let mut total_nutrition = NutritionInfo::from_macros(0.0, 0.0, 0.0);
+        let mut items = Vec::with_capacity(request.selected_dishes.len());
+        let mut shopping_list = BTreeMap::<(String, i64), f64>::new();
 
-        MenuPlanResult {
+        for selected_dish in &request.selected_dishes {
+            let Some(dish) = dishes_by_id.get(&selected_dish.dish_id) else {
+                continue;
+            };
+
+            let portions = normalize_portions(selected_dish.portions);
+
+            if let Some(dish_nutrition) =
+                NutritionService::calculate_dish_nutrition(dish, &ingredients_map)
+            {
+                let scaled_nutrition = dish_nutrition.multiply(portions);
+                total_nutrition = total_nutrition.add(&scaled_nutrition.as_nutrition_info());
+                items.push(menu_plan_item_from_dish_nutrition(
+                    &scaled_nutrition,
+                    portions,
+                ));
+            }
+
+            for dish_ingredient in &dish.ingredients {
+                let Some(ingredient) = ingredients_map.get(&dish_ingredient.ingredient_id) else {
+                    continue;
+                };
+
+                let key = (ingredient.name.clone(), dish_ingredient.ingredient_id);
+                *shopping_list.entry(key).or_insert(0.0) += dish_ingredient.amount * portions;
+            }
+        }
+
+        let goals = request.goals.clone();
+        let goal_comparison = goals
+            .as_ref()
+            .map(|target_goals| compare_nutrition_against_goals(&total_nutrition, target_goals));
+
+        Ok(MenuPlanResult {
             total_nutrition,
-            goals: goals.cloned(),
+            goals,
+            goal_comparison,
             items,
-            shopping_list,
-        }
+            shopping_list: shopping_list
+                .into_iter()
+                .map(
+                    |((ingredient_name, ingredient_id), amount)| ShoppingListItem {
+                        ingredient_id,
+                        ingredient_name,
+                        amount,
+                    },
+                )
+                .collect(),
+        })
     }
+}
 
-    /// Рассчитать список покупок на основе выбранных блюд
-    pub fn calculate_shopping_list(
-        conn: &Connection,
-        selected_dishes: &[SelectedDish],
-        dishes: &[Dish],
-    ) -> Vec<ShoppingListItem> {
-        use std::collections::HashMap;
+fn menu_plan_item_from_dish_nutrition(
+    dish_nutrition: &DishNutrition,
+    portions: f64,
+) -> MenuPlanItem {
+    MenuPlanItem {
+        dish_id: dish_nutrition.id,
+        name: dish_nutrition.name.clone(),
+        portions,
+        weight: dish_nutrition.weight,
+        calories: dish_nutrition.calories,
+        protein: dish_nutrition.protein,
+        fat: dish_nutrition.fat,
+        carbohydrates: dish_nutrition.carbohydrates,
+    }
+}
 
-        let mut ingredients_map: HashMap<i64, String> = HashMap::new();
+fn compare_nutrition_against_goals(current: &NutritionInfo, goals: &Goals) -> MenuGoalComparison {
+    let target = NutritionInfo::from_macros(goals.protein, goals.fat, goals.carbohydrates);
 
-        // Загружаем все ингредиенты в память
-        if let Ok(mut stmt) = conn.prepare("SELECT id, name FROM ingredients") {
-            if let Ok(rows) = stmt.query_map([], |row: &rusqlite::Row| {
-                Ok((row.get::<_, i64>(0)?, row.get::<_, String>(1)?))
-            }) {
-                for row in rows.flatten() {
-                    ingredients_map.insert(row.0, row.1);
-                }
-            }
-        }
+    MenuGoalComparison {
+        calories: compare_value(current.calories, target.calories),
+        protein: compare_value(current.protein, target.protein),
+        fat: compare_value(current.fat, target.fat),
+        carbohydrates: compare_value(current.carbohydrates, target.carbohydrates),
+    }
+}
 
-        let mut ingredient_amounts: HashMap<(i64, String), f64> = HashMap::new();
+fn compare_value(current: f64, target: f64) -> GoalComparisonValue {
+    GoalComparisonValue {
+        current,
+        target,
+        difference: current - target,
+        percentage: if target > 0.0 {
+            (current / target) * 100.0
+        } else {
+            0.0
+        },
+    }
+}
 
-        for selection in selected_dishes {
-            if let Some(dish) = dishes.iter().find(|d| d.id == Some(selection.dish_id)) {
-                let portions = selection.portions.max(1.0);
-
-                for di in &dish.ingredients {
-                    if let Some(name) = ingredients_map.get(&di.ingredient_id) {
-                        let key = (di.ingredient_id, name.clone());
-                        *ingredient_amounts.entry(key).or_insert(0.0) +=
-                            di.amount * portions;
-                    }
-                }
-            }
-        }
-
-        ingredient_amounts
-            .into_iter()
-            .map(|((ingredient_id, ingredient_name), amount)| ShoppingListItem {
-                ingredient_id,
-                ingredient_name,
-                amount,
-            })
-            .collect()
+fn normalize_portions(portions: f64) -> f64 {
+    if portions > 0.0 {
+        portions
+    } else {
+        1.0
     }
 }

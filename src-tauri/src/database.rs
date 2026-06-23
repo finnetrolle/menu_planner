@@ -1,256 +1,604 @@
-use rusqlite::{Connection, params};
-use std::path::PathBuf;
+mod seed_data;
 
-fn seed_database(conn: &Connection) -> Result<(), rusqlite::Error> {
-    // Проверяем, есть ли уже данные
-    let count: i64 = conn.query_row("SELECT COUNT(*) FROM ingredients", [], |row| row.get(0))?;
+use rusqlite::{params, params_from_iter, Connection};
+use std::{
+    collections::HashMap,
+    fs,
+    path::{Path, PathBuf},
+    sync::OnceLock,
+    time::{Duration, SystemTime, UNIX_EPOCH},
+};
+use tauri::{AppHandle, Manager, Runtime};
 
-    if count > 0 {
-        println!("Database already seeded with {} ingredients", count);
-        return Ok(());
-    }
+use seed_data::{SeedDish, SeedIngredient, SEED_DISHES, SEED_INGREDIENTS};
 
-    println!("Seeding database with initial data...");
+const DB_FILE_NAME: &str = "menu_planner.db";
+const LEGACY_APP_IDENTIFIERS: &[&str] = &["com.menuplanner.app"];
+static DB_PATH: OnceLock<PathBuf> = OnceLock::new();
 
-    // Ингредиенты
-    let ingredients = vec![
-        (1, "говядина лопатка лента", 19.4, 6.6, 0.0),
-        (2, "курица грудка лента", 24.5, 1.1, 0.0),
-        (3, "свинина шея лента", 19.0, 28.0, 0.0),
-        (4, "гречневая крупа мистраль", 12.0, 3.4, 72.0),
-        (5, "рис лазер", 7.5, 1.5, 77.0),
-        (6, "шин рамен", 8.0, 13.0, 67.0),
-        (7, "лапша рисовая", 6.4, 0.8, 79.0),
-        (8, "спагетти барилла", 14.0, 2.0, 69.7),
-        (9, "сливки 20%", 2.5, 20.0, 4.0),
-        (10, "сливки 10%", 2.8, 10.0, 4.3),
-        (11, "молоко 2,5% пискаревское", 3.0, 2.5, 4.7),
-        (12, "молоко 0,5% пармалат", 3.0, 0.5, 4.7),
-        (13, "сметана 10 простоквашино", 2.8, 10.0, 3.9),
-        (14, "сметана 15 пискаревская", 2.6, 15.0, 3.6),
-        (15, "йогурт теос 2%", 8.0, 2.0, 4.2),
-        (16, "кефир 1% пискаревский", 3.0, 1.0, 4.0),
-        (17, "творог 5% пискаревский", 16.0, 5.0, 3.0),
-        (18, "творог 0,5% экомилк", 18.0, 0.5, 1.2),
-        (19, "масло сливочное 82,5", 0.6, 82.5, 0.8),
-        (20, "масло кунжутное", 0.0, 99.8, 0.0),
-        (21, "масло оливковое", 0.0, 100.0, 0.0),
-        (22, "масло подсолнечное", 0.0, 99.9, 0.0),
-        (23, "вода", 0.0, 0.0, 0.0),
-        (24, "яйцо с1", 12.7, 11.5, 0.7),
-        (25, "кинза", 2.1, 0.5, 0.9),
-        (26, "соленый огурец", 0.0, 0.0, 2.0),
-        (27, "свекла", 1.6, 0.2, 10.0),
-        (28, "морковь", 1.3, 0.1, 7.2),
-        (29, "картофель", 2.0, 0.4, 16.3),
-        (30, "перец болгарский", 1.3, 0.1, 5.3),
-        (31, "лук", 1.1, 0.1, 5.7),
-        (32, "редис", 1.2, 0.1, 3.4),
-        (33, "капуста белокочанная", 1.8, 0.1, 4.7),
-        (34, "капуста цветная", 2.5, 0.3, 4.2),
-        (35, "капуста пакчой", 1.2, 0.2, 2.0),
-        (36, "огурцы", 0.8, 0.1, 2.8),
-        (37, "помидоры", 1.1, 0.2, 3.7),
-        (38, "укроп", 3.5, 1.1, 4.9),
-        (39, "айсберг", 0.9, 0.14, 1.7),
-        (40, "баклажан", 1.2, 0.1, 4.5),
-        (41, "брокколи", 2.57, 0.34, 3.87),
-        (42, "кабачок", 0.6, 0.3, 4.6),
-        (43, "лук зеленый", 1.3, 0.1, 3.2),
-        (44, "сельдерей", 0.69, 0.17, 1.37),
-        (45, "зеленый горошек", 3.0, 0.0, 6.0),
-        (46, "петрушка", 3.7, 0.4, 7.6),
-        (47, "соевый соус", 2.5, 0.0, 13.0),
-        (48, "рыбный соус", 12.0, 0.0, 6.0),
-        (49, "устричный соус", 5.1, 0.0, 28.0),
-        (50, "горчица", 7.5, 9.5, 20.0),
-        (51, "майонез рикко провансаль", 0.5, 67.0, 2.1),
-        (52, "томатная паста", 5.5, 0.0, 14.0),
-        (53, "чеснок", 6.4, 0.5, 31.0),
-        (54, "квас очаково", 0.0, 0.0, 6.5),
-        (55, "shin ramen", 8.2, 13.0, 68.0),
-        (56, "макароны barilla spaghettini n.3", 14.0, 2.0, 69.7),
-        (57, "минтай замороженный лента", 16.0, 1.0, 0.0),
-        (58, "капуста квашеная", 1.6, 0.07, 4.62),
-        (59, "джем махеев", 0.0, 0.0, 68.0),
-        (60, "овсянка 2", 13.0, 6.5, 55.0),
-        (61, "винный уксус", 0.1, 0.0, 0.4),
-        (62, "чернослив", 2.5, 0.5, 58.0),
-        (63, "кефир 2.5% пискаревский", 3.0, 2.5, 4.0),
-        (64, "банан", 1.1, 0.3, 20.2),
-        (65, "яблоко айдаред", 0.4, 0.4, 9.8),
-        (66, "батон нива водар хлеба", 8.0, 1.0, 50.0),
-        (67, "Молоко 3,2% простоквашино", 2.9, 3.2, 4.7),
-        (68, "Лапша пшеничная Midori удон", 12.3, 1.4, 59.2),
-        (69, "Апельсин", 0.9, 0.2, 8.4),
-        (70, "Имбирь", 1.8, 0.8, 17.8),
-        (71, "Крахмал картофельный", 0.0, 0.0, 79.0),
-        (72, "Мармелад", 0.0, 0.0, 84.0),
-        (73, "Тунец FORTUNA кусочки в собственном соку", 24.1, 0.75, 0.29),
-        (74, "Молоко стерилизованное ДОМИК В ДЕРЕВНЕ 1,5%", 3.0, 1.5, 4.7),
-        (75, "Optimium nutrition Gold Whey", 75.0, 4.5, 12.0),
-        (76, "Тестовый ингредиент", 10.0, 5.0, 20.0),
-        (77, "Для обновления", 15.0, 8.0, 25.0),
-        (78, "Тестовый ингредиент для блюда", 10.0, 5.0, 20.0),
-        (79, "Test Ingredient", 10.0, 5.0, 15.0),
-        (80, "Ingredient To Update", 10.0, 4.0, 20.0),
-    ];
+#[cfg_attr(not(test), allow(dead_code))]
+pub enum SeedMode {
+    Disabled,
+    SampleData,
+}
 
-    let ingredients_count = ingredients.len();
+mod migrations {
+    use refinery::embed_migrations;
 
-    for (id, name, protein, fat, carbs) in ingredients {
-        conn.execute(
-            "INSERT INTO ingredients (id, name, protein, fat, carbohydrates) VALUES (?1, ?2, ?3, ?4, ?5)",
-            params![id, name, protein, fat, carbs],
-        )?;
-    }
+    embed_migrations!("./migrations");
+}
 
-    // Блюда
-    let dishes = vec![
-        (4, "Чашушули", Some(0.0), vec![(1, 140.0), (22, 2.0), (25, 5.0), (30, 50.0), (31, 50.0), (37, 100.0), (46, 5.0), (52, 5.0)]),
-        (6, "Окрошка", Some(0.0), vec![(15, 30.0), (24, 60.0), (29, 50.0), (32, 50.0), (36, 50.0), (50, 5.0), (54, 200.0), (2, 100.0)]),
-        (8, "Кофе с молоком", Some(0.0), vec![(23, 150.0), (74, 150.0)]),
-        (9, "Овсяная каша", Some(0.0), vec![(23, 150.0), (60, 50.0), (74, 150.0)]),
-        (13, "Минтай", Some(0.0), vec![(57, 400.0)]),
-        (14, "Оливье", Some(0.0), vec![(2, 100.0), (15, 50.0), (24, 48.0), (26, 40.0), (28, 40.0), (29, 80.0), (45, 80.0)]),
-        (15, "Куриное филе", Some(0.0), vec![(2, 250.0)]),
-        (16, "Картофель фри", Some(0.0), vec![(29, 200.0)]),
-        (17, "Щи", Some(0.0), vec![(1, 70.0), (15, 30.0), (22, 2.0), (23, 300.0), (28, 15.0), (29, 20.0), (30, 15.0), (31, 15.0), (52, 7.0), (53, 0.25), (58, 30.0)]),
-        (18, "Винегрет", Some(0.0), vec![(22, 5.0), (26, 40.0), (27, 80.0), (28, 80.0), (29, 80.0), (31, 40.0), (45, 80.0), (58, 80.0)]),
-        (21, "Шин Рамен", Some(0.0), vec![(23, 300.0), (6, 60.0), (51, 15.0), (53, 20.0), (43, 50.0)]),
-        (22, "Греча с молоком", Some(0.0), vec![(4, 100.0), (23, 200.0), (74, 200.0)]),
-        (23, "Банан", Some(0.0), vec![(64, 140.0)]),
-        (24, "Паста Барилла 100", Some(0.0), vec![(19, 3.0), (8, 100.0)]),
-        (26, "Лапша с курицей", Some(0.0), vec![(22, 10.0), (28, 50.0), (30, 50.0), (47, 25.0), (68, 100.0), (69, 70.0), (70, 10.0), (71, 3.0), (2, 75.0), (43, 25.0)]),
-        (27, "Мармеладка", Some(0.0), vec![(72, 12.5)]),
-        (28, "Яблоко", Some(0.0), vec![(65, 140.0)]),
-        (29, "Вареное яйцо", Some(0.0), vec![(24, 60.0)]),
-        (30, "Мимоза тунцовая", Some(0.0), vec![(15, 40.0), (24, 30.0), (28, 75.0), (29, 75.0), (31, 25.0), (73, 90.0)]),
-        (31, "Протеин", Some(0.0), vec![(75, 31.0)]),
-        (32, "Тестовое блюдо", Some(0.0), vec![(78, 150.0)]),
-    ];
+pub fn resolve_app_db_path<R: Runtime>(app_handle: &AppHandle<R>) -> Result<PathBuf, String> {
+    let app_data_dir = app_handle
+        .path()
+        .app_data_dir()
+        .map_err(|e| format!("Failed to resolve app data directory: {e}"))?;
 
-    let dishes_count = dishes.len();
+    fs::create_dir_all(&app_data_dir).map_err(|e| {
+        format!(
+            "Failed to create app data directory {:?}: {}",
+            app_data_dir, e
+        )
+    })?;
 
-    for (id, name, weight, ingredients_list) in dishes {
-        conn.execute(
-            "INSERT OR IGNORE INTO dishes (id, name, weight) VALUES (?1, ?2, ?3)",
-            params![id, name, weight],
-        )?;
+    let app_db_path = app_data_dir.join(DB_FILE_NAME);
+    let legacy_candidates = legacy_db_candidates(
+        &app_data_dir,
+        &app_db_path,
+        std::env::current_exe().ok().as_deref(),
+    );
 
-        let dish_id = if id > 0 {
-            id as i64
-        } else {
-            conn.last_insert_rowid()
-        };
+    restore_legacy_database_if_needed(&app_db_path, &legacy_candidates)?;
 
-        for (ing_id, amount) in ingredients_list {
-            conn.execute(
-                "INSERT INTO dish_ingredients (dish_id, ingredient_id, amount) VALUES (?1, ?2, ?3)",
-                params![dish_id, ing_id, amount],
-            )?;
+    Ok(app_db_path)
+}
+
+fn legacy_db_candidates(
+    app_data_dir: &Path,
+    current_db_path: &Path,
+    current_exe_path: Option<&Path>,
+) -> Vec<PathBuf> {
+    let mut candidates = Vec::new();
+
+    if let Some(app_support_root) = app_data_dir.parent() {
+        for legacy_identifier in LEGACY_APP_IDENTIFIERS {
+            let legacy_db_path = app_support_root.join(legacy_identifier).join(DB_FILE_NAME);
+
+            if legacy_db_path != current_db_path && !candidates.contains(&legacy_db_path) {
+                candidates.push(legacy_db_path);
+            }
         }
     }
 
-    println!("Database seeded successfully with {} ingredients and {} dishes", ingredients_count, dishes_count);
+    if let Some(executable_dir) = current_exe_path.and_then(Path::parent) {
+        let legacy_db_path = executable_dir.join(DB_FILE_NAME);
+
+        if legacy_db_path != current_db_path && !candidates.contains(&legacy_db_path) {
+            candidates.push(legacy_db_path);
+        }
+    }
+
+    candidates
+}
+
+fn restore_legacy_database_if_needed(
+    current_db_path: &Path,
+    legacy_candidates: &[PathBuf],
+) -> Result<(), String> {
+    let Some(legacy_db_path) = newest_existing_db_path(legacy_candidates)? else {
+        return Ok(());
+    };
+
+    if !current_db_path.exists() {
+        copy_database_file(&legacy_db_path, current_db_path)?;
+        return Ok(());
+    }
+
+    if database_contains_only_seed_data(current_db_path)? {
+        copy_database_file(&legacy_db_path, current_db_path)?;
+    }
+
     Ok(())
 }
 
-pub fn get_db_path() -> PathBuf {
-    let mut path = std::env::current_exe().expect("Failed to get exe path");
-    path.pop();
-    path.push("menu_planner.db");
-    path
+fn newest_existing_db_path(candidates: &[PathBuf]) -> Result<Option<PathBuf>, String> {
+    let mut newest_candidate: Option<(SystemTime, PathBuf)> = None;
+
+    for candidate in candidates {
+        if !candidate.is_file() {
+            continue;
+        }
+
+        let modified = fs::metadata(candidate)
+            .map_err(|e| format!("Failed to inspect legacy database {:?}: {}", candidate, e))?
+            .modified()
+            .unwrap_or(UNIX_EPOCH);
+
+        match &newest_candidate {
+            Some((current_modified, _)) if modified <= *current_modified => {}
+            _ => newest_candidate = Some((modified, candidate.clone())),
+        }
+    }
+
+    Ok(newest_candidate.map(|(_, path)| path))
 }
 
-pub fn init_db(is_new: bool) -> Result<Connection, String> {
-    let db_path = get_db_path();
-
-    let conn = Connection::open(&db_path)
-        .map_err(|e| format!("Failed to open database at {:?}: {}", db_path, e))?;
-
-    // Create ingredients table
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS ingredients (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
-            protein REAL NOT NULL,
-            fat REAL NOT NULL,
-            carbohydrates REAL NOT NULL
-        )",
-        [],
-    ).map_err(|e| format!("Failed to create ingredients table: {}", e))?;
-
-    // Create index on ingredients.name for faster lookups
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_ingredients_name ON ingredients(name)",
-        [],
-    ).map_err(|e| format!("Failed to create index on ingredients.name: {}", e))?;
-
-    // Create dishes table
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS dishes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
-            weight REAL
-        )",
-        [],
-    ).map_err(|e| format!("Failed to create dishes table: {}", e))?;
-
-    // Create index on dishes.name for faster lookups
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_dishes_name ON dishes(name)",
-        [],
-    ).map_err(|e| format!("Failed to create index on dishes.name: {}", e))?;
-
-    // Create dish_ingredients table
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS dish_ingredients (
-            dish_id INTEGER NOT NULL,
-            ingredient_id INTEGER NOT NULL,
-            amount REAL NOT NULL,
-            PRIMARY KEY (dish_id, ingredient_id),
-            FOREIGN KEY (dish_id) REFERENCES dishes(id) ON DELETE CASCADE,
-            FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE CASCADE
-        )",
-        [],
-    ).map_err(|e| format!("Failed to create dish_ingredients table: {}", e))?;
-
-    // Create index on dish_ingredients.dish_id for faster JOIN queries
-    conn.execute(
-        "CREATE INDEX IF NOT EXISTS idx_dish_ingredients_dish_id ON dish_ingredients(dish_id)",
-        [],
-    ).map_err(|e| format!("Failed to create index on dish_ingredients.dish_id: {}", e))?;
-
-    // Create goals table
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS goals (
-            id INTEGER PRIMARY KEY DEFAULT 1,
-            protein REAL NOT NULL,
-            fat REAL NOT NULL,
-            carbohydrates REAL NOT NULL
-        )",
-        [],
-    ).map_err(|e| format!("Failed to create goals table: {}", e))?;
-
-    // Seed with initial data if this is a new database
-    if is_new {
-        seed_database(&conn)
-            .map_err(|e| format!("Failed to seed database: {}", e))?;
+fn copy_database_file(source: &Path, destination: &Path) -> Result<(), String> {
+    if let Some(parent_dir) = destination.parent() {
+        fs::create_dir_all(parent_dir).map_err(|e| {
+            format!(
+                "Failed to create database destination directory {:?}: {}",
+                parent_dir, e
+            )
+        })?;
     }
+
+    fs::copy(source, destination).map_err(|e| {
+        format!(
+            "Failed to copy legacy database from {:?} to {:?}: {}",
+            source, destination, e
+        )
+    })?;
+
+    Ok(())
+}
+
+fn database_contains_only_seed_data(path: &Path) -> Result<bool, String> {
+    let conn = Connection::open(path)
+        .map_err(|e| format!("Failed to inspect database {:?}: {}", path, e))?;
+
+    configure_connection(&conn)?;
+
+    let only_seed_ingredients = table_contains_only_seed_names(
+        &conn,
+        "ingredients",
+        SEED_INGREDIENTS.iter().map(|ingredient| ingredient.name),
+    )?;
+    let only_seed_dishes =
+        table_contains_only_seed_names(&conn, "dishes", SEED_DISHES.iter().map(|dish| dish.name))?;
+
+    Ok(only_seed_ingredients && only_seed_dishes)
+}
+
+fn table_contains_only_seed_names<'a, I>(
+    conn: &Connection,
+    table_name: &str,
+    allowed_names: I,
+) -> Result<bool, String>
+where
+    I: IntoIterator<Item = &'a str>,
+{
+    let allowed_names: Vec<&str> = allowed_names.into_iter().collect();
+    let placeholders = vec!["?"; allowed_names.len()].join(", ");
+    let query = format!("SELECT COUNT(*) FROM {table_name} WHERE name NOT IN ({placeholders})");
+    let unexpected_rows_count: i64 = conn
+        .query_row(
+            &query,
+            params_from_iter(allowed_names.iter().copied()),
+            |row| row.get(0),
+        )
+        .map_err(|e| format!("Failed to inspect table '{}': {}", table_name, e))?;
+
+    Ok(unexpected_rows_count == 0)
+}
+
+pub fn configure_database_path(db_path: PathBuf) -> Result<(), String> {
+    match DB_PATH.set(db_path.clone()) {
+        Ok(()) => Ok(()),
+        Err(_) => match DB_PATH.get() {
+            Some(existing) if existing == &db_path => Ok(()),
+            Some(existing) => Err(format!(
+                "Database path is already configured: {:?}",
+                existing
+            )),
+            None => Err("Database path is not configured".to_string()),
+        },
+    }
+}
+
+pub fn get_db_path() -> Result<&'static PathBuf, String> {
+    DB_PATH
+        .get()
+        .ok_or_else(|| "Database path is not configured".to_string())
+}
+
+#[cfg_attr(not(test), allow(dead_code))]
+pub fn bootstrap_connection(conn: &mut Connection, seed_mode: SeedMode) -> Result<(), String> {
+    bootstrap_connection_internal(conn, seed_mode, true)
+}
+
+fn bootstrap_connection_internal(
+    conn: &mut Connection,
+    seed_mode: SeedMode,
+    should_seed: bool,
+) -> Result<(), String> {
+    configure_connection(conn)?;
+    run_migrations(conn)?;
+
+    if should_seed && matches!(seed_mode, SeedMode::SampleData) {
+        seed_database(conn)?;
+    }
+
+    Ok(())
+}
+
+#[cfg_attr(not(test), allow(dead_code))]
+pub fn open_in_memory_connection(seed_mode: SeedMode) -> Result<Connection, String> {
+    let mut conn = Connection::open_in_memory()
+        .map_err(|e| format!("Failed to open in-memory database: {}", e))?;
+
+    bootstrap_connection(&mut conn, seed_mode)?;
+
+    Ok(conn)
+}
+
+pub fn open_connection_at(path: &Path, seed_mode: SeedMode) -> Result<Connection, String> {
+    let is_new_database = !path.exists();
+
+    if let Some(parent_dir) = path.parent() {
+        fs::create_dir_all(parent_dir)
+            .map_err(|e| format!("Failed to create parent directory {:?}: {}", parent_dir, e))?;
+    }
+
+    let mut conn = Connection::open(path)
+        .map_err(|e| format!("Failed to open database at {:?}: {}", path, e))?;
+
+    bootstrap_connection_internal(&mut conn, seed_mode, is_new_database)?;
 
     Ok(conn)
 }
 
 pub fn get_connection() -> Result<Connection, String> {
-    let db_path = get_db_path();
+    let db_path = get_db_path()?;
+    open_connection_at(db_path, SeedMode::SampleData)
+}
 
-    let is_new = !db_path.exists();
+pub fn seed_database(conn: &mut Connection) -> Result<(), String> {
+    let tx = conn
+        .unchecked_transaction()
+        .map_err(|e| format!("Failed to start seed transaction: {}", e))?;
 
-    if is_new {
-        return init_db(true);
+    let ingredient_ids = seed_ingredients(&tx)?;
+    seed_dishes(&tx, &ingredient_ids)?;
+
+    tx.commit()
+        .map_err(|e| format!("Failed to commit seed transaction: {}", e))?;
+
+    Ok(())
+}
+
+fn configure_connection(conn: &Connection) -> Result<(), String> {
+    conn.execute_batch("PRAGMA foreign_keys = ON;")
+        .map_err(|e| format!("Failed to enable foreign keys: {}", e))?;
+
+    conn.busy_timeout(Duration::from_secs(5))
+        .map_err(|e| format!("Failed to configure busy timeout: {}", e))?;
+
+    Ok(())
+}
+
+fn run_migrations(conn: &mut Connection) -> Result<(), String> {
+    migrations::migrations::runner()
+        .set_grouped(true)
+        .run(conn)
+        .map_err(|e| format!("Failed to run migrations: {}", e))?;
+
+    Ok(())
+}
+
+fn seed_ingredients(tx: &rusqlite::Transaction<'_>) -> Result<HashMap<i64, i64>, String> {
+    let mut ingredient_ids = HashMap::with_capacity(SEED_INGREDIENTS.len());
+
+    for ingredient in SEED_INGREDIENTS {
+        insert_seed_ingredient(tx, ingredient)?;
+
+        let ingredient_id: i64 = tx
+            .query_row(
+                "SELECT id FROM ingredients WHERE name = ?1",
+                params![ingredient.name],
+                |row| row.get(0),
+            )
+            .map_err(|e| {
+                format!(
+                    "Failed to fetch seeded ingredient '{}': {}",
+                    ingredient.name, e
+                )
+            })?;
+
+        ingredient_ids.insert(ingredient.legacy_id, ingredient_id);
     }
 
-    Connection::open(&db_path)
-        .map_err(|e| format!("Failed to open database: {}", e))
+    Ok(ingredient_ids)
+}
+
+fn seed_dishes(
+    tx: &rusqlite::Transaction<'_>,
+    ingredient_ids: &HashMap<i64, i64>,
+) -> Result<(), String> {
+    for dish in SEED_DISHES {
+        insert_seed_dish(tx, dish, ingredient_ids)?;
+    }
+
+    Ok(())
+}
+
+fn insert_seed_ingredient(
+    tx: &rusqlite::Transaction<'_>,
+    ingredient: &SeedIngredient,
+) -> Result<(), String> {
+    tx.execute(
+        "INSERT OR IGNORE INTO ingredients (name, protein, fat, carbohydrates) VALUES (?1, ?2, ?3, ?4)",
+        params![
+            ingredient.name,
+            ingredient.protein,
+            ingredient.fat,
+            ingredient.carbohydrates
+        ],
+    )
+    .map_err(|e| format!("Failed to seed ingredient '{}': {}", ingredient.name, e))?;
+
+    Ok(())
+}
+
+fn insert_seed_dish(
+    tx: &rusqlite::Transaction<'_>,
+    dish: &SeedDish,
+    ingredient_ids: &HashMap<i64, i64>,
+) -> Result<(), String> {
+    tx.execute(
+        "INSERT OR IGNORE INTO dishes (name, weight) VALUES (?1, ?2)",
+        params![dish.name, dish.weight],
+    )
+    .map_err(|e| format!("Failed to seed dish '{}': {}", dish.name, e))?;
+
+    let dish_id: i64 = tx
+        .query_row(
+            "SELECT id FROM dishes WHERE name = ?1",
+            params![dish.name],
+            |row| row.get(0),
+        )
+        .map_err(|e| format!("Failed to fetch seeded dish '{}': {}", dish.name, e))?;
+
+    let ingredient_rows_count: i64 = tx
+        .query_row(
+            "SELECT COUNT(*) FROM dish_ingredients WHERE dish_id = ?1",
+            params![dish_id],
+            |row| row.get(0),
+        )
+        .map_err(|e| {
+            format!(
+                "Failed to inspect seeded ingredients for dish '{}': {}",
+                dish.name, e
+            )
+        })?;
+
+    if ingredient_rows_count > 0 {
+        return Ok(());
+    }
+
+    for ingredient in dish.ingredients {
+        let ingredient_id = ingredient_ids
+            .get(&ingredient.legacy_ingredient_id)
+            .copied()
+            .ok_or_else(|| {
+                format!(
+                    "Seed ingredient id {} is missing for dish '{}'",
+                    ingredient.legacy_ingredient_id, dish.name
+                )
+            })?;
+
+        tx.execute(
+            "INSERT INTO dish_ingredients (dish_id, ingredient_id, amount) VALUES (?1, ?2, ?3)",
+            params![dish_id, ingredient_id, ingredient.amount],
+        )
+        .map_err(|e| {
+            format!(
+                "Failed to seed ingredient row for dish '{}': {}",
+                dish.name, e
+            )
+        })?;
+    }
+
+    Ok(())
+}
+
+#[cfg(test)]
+mod database_path_tests {
+    use super::{
+        database_contains_only_seed_data, legacy_db_candidates, open_connection_at,
+        restore_legacy_database_if_needed, SeedMode,
+    };
+    use rusqlite::params;
+    use std::{
+        fs,
+        path::{Path, PathBuf},
+        time::{SystemTime, UNIX_EPOCH},
+    };
+
+    struct TestDir {
+        path: PathBuf,
+    }
+
+    impl TestDir {
+        fn new(name: &str) -> Self {
+            let unique_suffix = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .expect("System time should be after UNIX_EPOCH")
+                .as_nanos();
+            let path = std::env::temp_dir().join(format!(
+                "menu_planner_{name}_{}_{}",
+                std::process::id(),
+                unique_suffix
+            ));
+
+            fs::create_dir_all(&path).expect("Failed to create temp test directory");
+
+            Self { path }
+        }
+
+        fn path(&self) -> &Path {
+            &self.path
+        }
+    }
+
+    impl Drop for TestDir {
+        fn drop(&mut self) {
+            let _ = fs::remove_dir_all(&self.path);
+        }
+    }
+
+    fn seed_database_at(path: &Path) {
+        let _conn = open_connection_at(path, SeedMode::SampleData)
+            .expect("Failed to create seeded database");
+    }
+
+    fn seed_database_with_custom_dish(path: &Path, ingredient: &str, dish: &str) {
+        let conn = open_connection_at(path, SeedMode::SampleData)
+            .expect("Failed to create source database");
+
+        conn.execute(
+            "INSERT INTO ingredients (name, protein, fat, carbohydrates) VALUES (?1, ?2, ?3, ?4)",
+            params![ingredient, 10.0, 5.0, 20.0],
+        )
+        .expect("Failed to insert custom ingredient");
+        let ingredient_id = conn.last_insert_rowid();
+
+        conn.execute(
+            "INSERT INTO dishes (name, weight) VALUES (?1, ?2)",
+            params![dish, 250.0],
+        )
+        .expect("Failed to insert custom dish");
+        let dish_id = conn.last_insert_rowid();
+
+        conn.execute(
+            "INSERT INTO dish_ingredients (dish_id, ingredient_id, amount) VALUES (?1, ?2, ?3)",
+            params![dish_id, ingredient_id, 250.0],
+        )
+        .expect("Failed to link custom dish ingredient");
+    }
+
+    fn has_dish(path: &Path, dish: &str) -> bool {
+        let conn = open_connection_at(path, SeedMode::Disabled).expect("Failed to open database");
+        let count: i64 = conn
+            .query_row(
+                "SELECT COUNT(*) FROM dishes WHERE name = ?1",
+                params![dish],
+                |row| row.get(0),
+            )
+            .expect("Failed to query dish count");
+
+        count == 1
+    }
+
+    #[test]
+    fn legacy_candidates_include_old_identifier_and_executable_directory() {
+        let test_dir = TestDir::new("legacy_candidates");
+        let app_support_dir = test_dir
+            .path()
+            .join("Application Support")
+            .join("com.menuplanner");
+        let current_db_path = app_support_dir.join("menu_planner.db");
+        let executable_path = test_dir
+            .path()
+            .join("Menu Planner.app")
+            .join("Contents")
+            .join("MacOS")
+            .join("menu-planner");
+
+        let candidates =
+            legacy_db_candidates(&app_support_dir, &current_db_path, Some(&executable_path));
+
+        assert!(candidates.contains(
+            &test_dir
+                .path()
+                .join("Application Support")
+                .join("com.menuplanner.app")
+                .join("menu_planner.db")
+        ));
+        assert!(candidates.contains(
+            &test_dir
+                .path()
+                .join("Menu Planner.app")
+                .join("Contents")
+                .join("MacOS")
+                .join("menu_planner.db")
+        ));
+    }
+
+    #[test]
+    fn restores_missing_database_from_legacy_source() {
+        let test_dir = TestDir::new("restore_missing");
+        let current_db_path = test_dir
+            .path()
+            .join("Application Support")
+            .join("com.menuplanner")
+            .join("menu_planner.db");
+        let legacy_db_path = test_dir.path().join("legacy").join("menu_planner.db");
+
+        seed_database_with_custom_dish(
+            &legacy_db_path,
+            "Ингредиент из старой версии",
+            "Блюдо из старой версии",
+        );
+
+        restore_legacy_database_if_needed(&current_db_path, std::slice::from_ref(&legacy_db_path))
+            .expect("Failed to restore missing database from legacy");
+
+        assert!(current_db_path.exists());
+        assert!(has_dish(&current_db_path, "Блюдо из старой версии"));
+        assert!(!database_contains_only_seed_data(&current_db_path).unwrap());
+    }
+
+    #[test]
+    fn restores_seed_only_database_from_legacy_source() {
+        let test_dir = TestDir::new("restore_seed_only");
+        let current_db_path = test_dir
+            .path()
+            .join("Application Support")
+            .join("com.menuplanner")
+            .join("menu_planner.db");
+        let legacy_db_path = test_dir.path().join("legacy").join("menu_planner.db");
+
+        seed_database_at(&current_db_path);
+        seed_database_with_custom_dish(
+            &legacy_db_path,
+            "Пользовательский ингредиент",
+            "Пользовательское блюдо",
+        );
+
+        assert!(database_contains_only_seed_data(&current_db_path).unwrap());
+
+        restore_legacy_database_if_needed(&current_db_path, std::slice::from_ref(&legacy_db_path))
+            .expect("Failed to restore seed-only database from legacy");
+
+        assert!(has_dish(&current_db_path, "Пользовательское блюдо"));
+    }
+
+    #[test]
+    fn keeps_current_database_when_it_already_has_user_data() {
+        let test_dir = TestDir::new("keep_current");
+        let current_db_path = test_dir
+            .path()
+            .join("Application Support")
+            .join("com.menuplanner")
+            .join("menu_planner.db");
+        let legacy_db_path = test_dir.path().join("legacy").join("menu_planner.db");
+
+        seed_database_with_custom_dish(
+            &current_db_path,
+            "Текущий ингредиент",
+            "Текущее пользовательское блюдо",
+        );
+        seed_database_with_custom_dish(
+            &legacy_db_path,
+            "Старый ингредиент",
+            "Старое пользовательское блюдо",
+        );
+
+        restore_legacy_database_if_needed(&current_db_path, std::slice::from_ref(&legacy_db_path))
+            .expect("Failed while deciding whether to keep current database");
+
+        assert!(has_dish(&current_db_path, "Текущее пользовательское блюдо"));
+        assert!(!has_dish(&current_db_path, "Старое пользовательское блюдо"));
+    }
 }

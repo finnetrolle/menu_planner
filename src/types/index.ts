@@ -4,6 +4,13 @@ export interface NutritionInfo {
   carbohydrates: number
 }
 
+export interface NutritionSummary {
+  calories: number
+  protein: number
+  fat: number
+  carbohydrates: number
+}
+
 // Сериализуемая структура для Tauri (соответствует Rust backend)
 export interface Ingredient {
   id: number | null
@@ -38,6 +45,55 @@ export interface Goals {
   protein: number
   fat: number
   carbohydrates: number
+}
+
+export interface SelectedDishInput {
+  dish_id: number
+  portions: number
+}
+
+export interface MenuPlanRequest {
+  selected_dishes: SelectedDishInput[]
+  goals?: Omit<Goals, 'id'> | null
+}
+
+export interface GoalComparisonValue {
+  current: number
+  target: number
+  difference: number
+  percentage: number
+}
+
+export interface MenuGoalComparison {
+  calories: GoalComparisonValue
+  protein: GoalComparisonValue
+  fat: GoalComparisonValue
+  carbohydrates: GoalComparisonValue
+}
+
+export interface MenuPlanItem {
+  dish_id: number
+  name: string
+  portions: number
+  weight: number
+  calories: number
+  protein: number
+  fat: number
+  carbohydrates: number
+}
+
+export interface ShoppingListItem {
+  ingredient_id: number
+  ingredient_name: string
+  amount: number
+}
+
+export interface MenuPlanResult {
+  total_nutrition: NutritionSummary
+  goals: Goals | null
+  goal_comparison: MenuGoalComparison | null
+  items: MenuPlanItem[]
+  shopping_list: ShoppingListItem[]
 }
 
 // Вспомогательная функция для создания NutritionInfo из Ingredient
